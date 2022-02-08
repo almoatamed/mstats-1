@@ -1,0 +1,180 @@
+
+
+the application is used mainly for marketing perpuses, in this case it used to collect parameters about marketing in medical/pharma company
+
+
+- the characters are
+  - medical representetives
+  - doctors 
+  - pharmacy 
+
+the company wants to know
+  - the details of the doctor
+    - name
+    - speciality 
+    - work places 
+      - hospitals ( many to many ) 
+    - products 
+      - products list from product doctor relation table (many to many)
+    - count of issues prescreptions 
+      - from prescriptions table ( select count(*) from prescriptions p where p.doctor = d.id and status = "issued" and issued_date between filter_date and other_filter_date)
+  - hospital data 
+    - doctors
+      - ( select select d.* from 
+            doctors d 
+            inner join 
+            (select hd.d_id as d_id from 
+               hospital_doctor_relations hd 
+                 where hd.h_id = hospital_id) d_ids 
+            on d.id = d_ids.d_id 
+        )
+    - address 
+    - name 
+    - working hours
+    - pharmacies       
+      - ( select select p.* from 
+            pharmacies p
+            inner join 
+            (select hp.p_id as p_id from 
+               hospital_pharmacy_relations hp 
+                 where hp.h_id = hospital_id) p_ids 
+            on p.id = p_ids.p_id  
+        )
+  - pharmacy_data 
+    - hospitals 
+    - address
+    - issued prescriptions 
+      - ( select count(*) from doctor_prescriptions dp where dp.pharamcy_id = p.id and stutus = 'issued')
+  - representative data 
+    - name 
+    - doctors
+    - count of issued prescriptions 
+      - ( select count(*) from 
+          sheets s
+          inner join 
+          (
+            select rdr.doctor_id as doctor_id from 
+            representative_doctor_relations rdr where 
+            rdr.representative_id = {r_id}
+          ) r on s.doctor_id = r.doctor_id
+          where 
+            s.status = 'issued' and {date_fileter}
+        )
+  - prescription data
+    - prescription name 
+    - number of products 
+    - number of doctors 
+    - number of remaining sheets
+    - number of issued sheets 
+    - total number of sheets
+    - prescription details link
+      - products table (many to many select) 
+      - total number of issued sheets
+      - issued sheets paginated table
+      - remaining sheets total count, table list doctor and count
+      - doctors list
+  - sheets 
+    - table of issued presciptions with date filter, product filter, user filter, etc
+....
+..
+
+################################################## Steps ###########################################################################
+
+
+- create Login Page 
+  - create route based on layout 
+  - create layout for login 
+- create axios api 
+- create login axios api
+- create express server
+- create database connection
+- create database seeder 
+- create routers
+- create user route 
+- create login route 
+- create auth middle ware 
+- create nginx server 
+- create user registration page 
+- create user registration api 
+- create pagination strategy on server, using indexing on any select query, with limiting to specific number of 
+  results, while counting the total number of results for numbering pages with specific page request 
+  if page is out of range then redirect to 404
+- create users view page 
+- create users fetch with pagination api 
+- craete user detail page (edit page) where yo show details and recent logs related to user 
+- create 404 page 
+- create logout action 
+- create user state managment 
+- create user load action on startup/login from local storage
+- create user setting save to localstorage on logout or app.vue is destroyed 
+- create hospital registration page from 
+- create hospital registration api 
+- create pharmacy registration page 
+- create pharmacy registration api with password and username for later use on the pharmacy app 
+- create pharmacies table page 
+- create pharmacy details page (edit page) where pharmacy is to be edited 
+- create medical representative registration page 
+- create medical rep api 
+- create med reps table page 
+- create med rep detail page 
+- create doctor registration page 
+- create doctor registration api 
+- create doctors table page 
+- create doctors details page where you 
+- create product registration page with photo upload
+- create product and file registration api for products using multer 
+- create static file api access using express static on route /api/public 
+- create products review page 
+- create product detail page (edit page) with details with parameters view 
+- create product fetching/searching api 
+- create prescription registration page by selecting number of product to include in the prescription (minimum of one) 
+  with name and other details if requries 
+- create prescriptions table page 
+- craete prescription detail page showing paramters (stats) and prescription details
+- create prescription fetchign/searching api 
+- create a way to generate sheets for certain prescription linked to certain doctor certain doctor, where it will be generated and saved 
+  to database, with flags of unused, unprinted, once generated you can print it using html2pdf,
+  you can also print the unused sheets ( as a reprent) 
+- design a login page for the pharmcy app 
+- create axios api for pharma app 
+- create auth api (axios)
+- design pharma auth handler api 
+- create pharma login api 
+- create qr scanner for prescriptions, after scanning direct to product select page 
+- create product select page where you can select what products selected 
+- submit button 
+- create used prescription hseet page where this prescriptions is not valid 
+- create deploy mechanism
+
+
+  
+    
+
+   
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     

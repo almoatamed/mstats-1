@@ -1,0 +1,16 @@
+{
+  "name": "mstats",
+  "version": "1.0.0",
+  "description": "medical rep stats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ~/mstats/index.js"
+  },
+  "author": "salem elmotamed",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mysql": "^2.18.1"
+  }
+}

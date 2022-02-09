@@ -14,6 +14,7 @@ const theme = {
   success: '#4CAF50',
   warning: '#FB8C00',
   error: '#FF5252',
+  theme: '#064C86',
 }
 
 export default new Vuetify({

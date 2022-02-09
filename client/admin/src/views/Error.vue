@@ -18,6 +18,7 @@
           depressed
           large
           to="/"
+          color="theme"
         >
           Get me out of here!
         </v-btn>

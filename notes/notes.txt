@@ -83,13 +83,13 @@ the company wants to know
 
 - create Login Page 
   - create route based on layout 
-  - create layout for login 
+  - create layout for login  
 - create axios api 
 - create login axios api
 - create express server
 - create database connection
 - create database seeder 
-- create routers
+- create routers (backend)
 - create user route 
 - create login route 
 - create auth middle ware 

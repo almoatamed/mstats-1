@@ -81,9 +81,9 @@ the company wants to know
 ################################################## Steps ###########################################################################
 
 
-- create Login Page 
-  - create route based on layout 
-  - create layout for login  
+- create Login Page -- 
+  - create route based on layout --
+  - create layout for login --
 - create axios api 
 - create login axios api
 - create express server --

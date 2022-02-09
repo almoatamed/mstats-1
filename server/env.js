@@ -4,7 +4,12 @@ module.exports = {
             host: "localhost",
             user: "admin",
             password: "admin",
-            database: "mydb"
+            database: "pharma"
         }
+    },
+    auth:{
+        bcrypt:{
+            rounds: 10
+        },
     }
 }

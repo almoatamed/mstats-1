@@ -2,8 +2,13 @@ const env  = require('../env.js')
 const mysql = require('mysql');
 
 
-const con = mysql.createConnection(env.db.mysql);
+const pool = mysql.createPool({
+    host: "localhost",
+    user: "admin",
+    password: "admin",
+    database: "pharma"
+});
 
 module.exports = {
-    con, 
+    pool,     
 }

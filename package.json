@@ -10,7 +10,9 @@
   "author": "salem elmotamed",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.2",
+    "moment": "^2.29.1",
     "multer": "^1.4.4",
     "mysql": "^2.18.1"
   }

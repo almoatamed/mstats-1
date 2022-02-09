@@ -83,14 +83,14 @@ the company wants to know
 
 - create Login Page 
   - create route based on layout 
-  - create layout for login 
+  - create layout for login  
 - create axios api 
 - create login axios api
-- create express server
-- create database connection
-- create database seeder 
-- create routers
-- create user route 
+- create express server --
+- create database connection --
+- create user seeder --
+- create routers (backend)  --
+- create user route
 - create login route 
 - create auth middle ware 
 - create nginx server 
@@ -123,7 +123,7 @@ the company wants to know
 - create doctors details page where you 
 - create product registration page with photo upload
 - create product and file registration api for products using multer 
-- create static file api access using express static on route /api/public 
+- create static file api access using express static on route /api/public --
 - create products review page 
 - create product detail page (edit page) with details with parameters view 
 - create product fetching/searching api 

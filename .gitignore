@@ -25,6 +25,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+*.test.* 
 
 .release-it.json
 now.json

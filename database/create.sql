@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS`pharmacies` (
   `address` varchar(255),
   `phone` varchar(20),
   `email` varchar(255),
+  `username` varchar(255), 
+  `password` varchar(255),
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
@@ -110,7 +112,7 @@ CREATE TABLE IF NOT EXISTS`prescriptions` (
   `create_by_user` INT
 );
 
-CREATE TABLE IF NOT EXISTS`doctor_prescriptions` (
+CREATE TABLE IF NOT EXISTS`sheets` (
   `sheet_id` INT PRIMARY KEY AUTO_INCREMENT,
   `doctor_id` INT,
   `prescription_id` INT,
@@ -178,13 +180,13 @@ CREATE TABLE IF NOT EXISTS`prescription_product_relations` (
 
 -- ALTER TABLE `prescriptions` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
 
--- ALTER TABLE `doctor_prescriptions` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`);
+-- ALTER TABLE `sheets` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`);
 
--- ALTER TABLE `doctor_prescriptions` ADD FOREIGN KEY (`prescription_id`) REFERENCES `prescriptions` (`prescription_id`);
+-- ALTER TABLE `sheets` ADD FOREIGN KEY (`prescription_id`) REFERENCES `prescriptions` (`prescription_id`);
 
--- ALTER TABLE `doctor_prescriptions` ADD FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`pharmacy_id`);
+-- ALTER TABLE `sheets` ADD FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`pharmacy_id`);
 
--- ALTER TABLE `doctor_prescriptions` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `sheets` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `doctor_hospital_relations` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`);
 

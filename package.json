@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ~/mstats/index.js"
+    "start": "node ~/mstats/src/index.js"
   },
   "author": "salem elmotamed",
   "license": "ISC",

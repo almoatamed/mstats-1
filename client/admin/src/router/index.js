@@ -1,11 +1,12 @@
+/* eslint-disable */
 // Imports
 import Vue from 'vue'
 import Router from 'vue-router'
-import { trailingSlash } from '@/util/helpers'
 import {
   layout,
   route,
 } from '@/util/routes'
+import store from '../store/index'
 
 Vue.use(Router)
 
@@ -20,39 +21,77 @@ const router = new Router({
   },
   routes: [
 
-    layout('Page', [
-      route('Login'),
+    {
+      ...layout('Page', [
+        {
+          ...route('Login'),
+          meta:{requiresVisitor:true},
+        },
 
-      // Errors
-      route('Error', null, 'error'),
+        // Errors
+        route('Error', null, 'error'),
 
-      // Suppport Page
-      route('Support', null, 'support'),
+        // Suppport Page
+        route('Support', null, 'support'),
 
-    ]),
+      ]),
+      meta:{
+      }
 
-    layout('Default', [
-      route('Dashboard'),
+    },
 
-      // Pages
-      route('UserProfile', null, 'components/profile'),
+    {
+      ...layout('Default', [
+        route('Dashboard'),
 
-      // Components
-      route('Notifications', null, 'components/notifications'),
-      route('Icons', null, 'components/icons'),
-      route('Typography', null, 'components/typography'),
+        // Pages
+        route('UserProfile', null, 'components/profile'),
 
-      // Tables
-      route('Regular Tables', null, 'tables/regular'),
+        // Components
+        route('Notifications', null, 'components/notifications'),
+        route('Icons', null, 'components/icons'),
+        route('Typography', null, 'components/typography'),
 
-      // Maps
-      route('Google Maps', null, 'maps/google'),
-    ], '/dashboard'),
+        // Tables
+        route('Regular Tables', null, 'tables/regular'),
+
+        // Maps
+        route('Google Maps', null, 'maps/google'),
+      ], '/dashboard'),
+      meta:{RequiresAuth:true}
+    },
   ],
 })
 
 router.beforeEach((to, from, next) => {
-  return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
+  console.log(
+    'Routing ......', 
+    '\n', to.fullPath, 
+    '\n', from.fullPath, 
+  )
+  let auth =  store.getters['user/auth']
+  if (to.matched.some(record => record.meta.RequiresAuth)) {
+    console.log('requires authorization, auth: ',auth)
+    if (!auth) {
+      next({
+        name: "Login",
+        query: { redirect: to.fullPath }
+      });
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    console.log('requires visitor, auth: ', auth)
+    if (auth) {
+      next("/dashboard");
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 })
+
+
 
 export default router

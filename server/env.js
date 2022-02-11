@@ -8,8 +8,12 @@ module.exports = {
         }
     },
     auth:{
+        seed_key:'1234asdf',
         bcrypt:{
             rounds: 10
         },
+        jwt:{
+            secret: "hah!whats_wrong?"
+        }
     }
 }

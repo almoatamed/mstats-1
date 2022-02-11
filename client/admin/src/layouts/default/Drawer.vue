@@ -80,9 +80,9 @@
 
     computed: {
       ...get('user', [
-        'dark',
-        'gradient',
-        'image',
+        'visualization@dark',
+        'visualization@gradient',
+        'visualization@image',
       ]),
       ...get('app', [
         'items',

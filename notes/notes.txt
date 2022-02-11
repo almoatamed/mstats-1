@@ -90,11 +90,11 @@ the company wants to know
 - create database connection --
 - create user seeder --
 - create routers (backend)  --
-- create user route
-- create login route 
-- create auth middle ware 
-- create nginx server 
-- create user registration page 
+- create user route --
+- create login route --
+- create auth middle ware --
+- create nginx server --
+- create user registration page
 - create user registration api 
 - create pagination strategy on server, using indexing on any select query, with limiting to specific number of 
   results, while counting the total number of results for numbering pages with specific page request 
@@ -103,10 +103,10 @@ the company wants to know
 - create users fetch with pagination api 
 - craete user detail page (edit page) where yo show details and recent logs related to user 
 - create 404 page 
-- create logout action 
-- create user state managment 
-- create user load action on startup/login from local storage
-- create user setting save to localstorage on logout or app.vue is destroyed 
+- create logout action --
+- create user state managment --
+- create user load action on startup/login from local storage --
+- create user setting save to localstorage on logout or app.vue is destroyed --
 - create hospital registration page from 
 - create hospital registration api 
 - create pharmacy registration page 
@@ -137,7 +137,7 @@ the company wants to know
   you can also print the unused sheets ( as a reprent) 
 - design a login page for the pharmcy app 
 - create axios api for pharma app 
-- create auth api (axios)
+- create auth api (axios) --
 - design pharma auth handler api 
 - create pharma login api 
 - create qr scanner for prescriptions, after scanning direct to product select page 

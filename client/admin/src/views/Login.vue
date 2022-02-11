@@ -18,10 +18,12 @@
             <template #heading>
               <div class="text-center pa-5">
                 <div class="text-h4 font-weight-bold white--text">
-                        <v-icon
-          :left="$vuetify.breakpoint.mdAndUp"
-          size="30"
-        >mdi-fingerprint</v-icon>
+                  <v-icon
+                    :left="$vuetify.breakpoint.mdAndUp"
+                    size="30"
+                  >
+                    mdi-fingerprint
+                  </v-icon>
                   Login
                 </div>
               </div>
@@ -33,12 +35,14 @@
               </div>
 
               <v-text-field
+                v-model="user.username"
                 color="theme"
                 placeholder="Username..."
                 prepend-icon="mdi-account-outline"
               />
 
               <v-text-field
+                v-model="user.password"
                 class="mb-8"
                 color="theme"
                 placeholder="Password..."
@@ -49,8 +53,11 @@
               <v-btn
                 color="theme"
                 rounded
+                :disabled="loading"
+                :loading="loading"
                 text
                 large
+                @click="login"
               >
                 Login
               </v-btn>
@@ -63,10 +70,18 @@
 </template>
 
 <script>
+
+  /* eslint-disable */
+  import { sync } from 'vuex-pathify'
   export default {
     name: 'LoginView',
 
     data: () => ({
+      loading:false,
+      user:{
+        password:'', 
+        username:'', 
+      },
       socials: [
         {
           href: '#',
@@ -78,9 +93,43 @@
         },
         {
           href: '#',
-          icon: 'mdi-github',
+          icon: 'mdi-github', 
         },
       ],
-    }),
+    }), 
+
+    created(){
+      this.loading_cover = true
+      this.$store.dispatch('user/verify', null, {root:true}).then((res)=>{
+        this.loading_cover = false 
+        if(this.$route.query['redirect']){
+            this.$router.push(this.$route.query.redirect).then(()=>{}).catch(err=>{console.log(err)})
+        }else{
+            this.$router.push('/dashboard').then(()=>{}).catch(err=>{console.log(err)})
+        }
+      }).catch((err)=>{
+        this.loading_cover = false
+      })
+    },
+    computed: {
+      ...sync('user', {loading_cover: 'visualization@loading_cover',},),
+    },
+    methods: {
+      login(){
+          this.loading = true
+          var self = this
+          this.$store.dispatch('user/login',this.user,{root:true}).then((res)=>{
+              self.loading = false
+              if(this.$route.query['redirect']){
+                  this.$router.push(this.$route.query.redirect).then(()=>{}).catch(err=>{console.log(err)})
+              }else{
+                  this.$router.push('/dashboard').then(()=>{}).catch(err=>{console.log(err)})
+              }
+          }).catch((err)=>{
+              self.loading = false
+              self.$store.dispatch('user/notify',{msg:err.response.data.error.msg, color:'error'})
+          })
+      }
+    }
   }
 </script>

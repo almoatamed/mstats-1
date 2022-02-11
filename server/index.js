@@ -19,11 +19,11 @@ app.use((req,res,next)=>{
 
 
 // router 
-app.use('/api',require('./routers/main'))
+app.use('/server/api',require('./routers/main'))
 
 
 // Set static folder
-app.use('files', express.static(path.join(__dirname, 'public')));
+app.use('/server/files', express.static(path.join(__dirname, 'public')));
 
 
 // server launch 

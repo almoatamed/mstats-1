@@ -1,6 +1,5 @@
 <script>
   import { VHover, VListItem } from 'vuetify/lib'
-
   export default {
     name: 'AppBarItem',
 

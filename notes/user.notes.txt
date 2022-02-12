@@ -1,0 +1,49 @@
+
+
+
+
+- create user login route on backend 
+  - craete the route (post) --
+  - check if username and password are valid --
+    - craete rules --
+    - user rules  --
+    - username rules -- 
+    - password rules -- 
+  - check if user name exists if not then return 421 error with same message (select user bsed on username) --
+  - check body password against real password -- 
+  - return token with user id if valid --
+
+- create auth middleware --
+  - create middlewares --
+  - create jwt verification either return 421 or contineus next() --
+
+- craete axios api --
+- create login api -- 
+- create login action in store -- 
+- create before each interceptor at router --
+
+- user auto auth on launch (front end)
+  - create login created  -- 
+  - create verification route on user (backend) --
+  - create user verify api axios -- 
+  - craete verify action in store for user in user store --
+  - craete loading_cover component -- 
+  - in store/app.js include status for loading_cover -- 
+  - in app.vue sync loading_cover -- 
+  - in app.vue include loading component with passing param of loading from the sync value --
+  - in login.vue craeted hook, set loading cover to true,  -- 
+  - i......................., verify user autherity if it is --
+    - remove cover --
+    - push to redirect if exists, if not push to /dashboard --
+  - if not authorized  --
+    - remove cover --
+  - in login.vue craete login method  --
+  - in end of login action push to /dashboard -- 
+  - include notification snackbar bottom center component in the app.vue --
+  - sync notificatio snack bar with notification module in store (message, color), --
+  - create push notification action in notification module in store, -- 
+  - use notfication module to handle errors in login --
+
+
+
+

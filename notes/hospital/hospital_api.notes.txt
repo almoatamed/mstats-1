@@ -1,0 +1,22 @@
+
+
+
+
+
+
+
+
+- make a router for hospital
+- make a regitstration router file 
+- in the registration router file, create a POST registration request, with auth middleware
+- in the registration post request, validate using rules ( if a validator doesnt exist create it )  
+  - name 
+  - address
+  - phone number 
+  - email
+- if rules fail return 400 response
+- check required fields, if any required field missing return 400 response
+- cool query pool, and aquire connection 
+- in the query pool validate if the name of the hospital is already registered, if so return 400 response
+- if there is no hospital with the same name, then register the data in database, and return 200 response.
+

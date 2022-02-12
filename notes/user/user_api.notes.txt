@@ -1,0 +1,17 @@
+- make a router for user --
+- make a regitstration router file --
+- in the registration router file, create a POST registration request, with auth middleware --
+- in the registration post request, validate using rules ( if a validator doesnt exist create it )  
+  - required -- 
+  - name --
+  - address --
+  - phone number --
+  - email --
+  - user_name -- 
+  - password --
+- if rules fail return 400 response --
+- check required fields, if any required field missing return 400 response --
+- cool query pool, and aquire connection --
+- in the query pool validate if the username is already registered, if so return 400response --
+- if there is no user with the same user_name, then register the data in database, and return 200 response.
+

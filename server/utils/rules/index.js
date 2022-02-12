@@ -36,7 +36,7 @@ module.exports = async (rules, value,field)=>{
             rules = Object.values(rules)
             
             const empty = ! (await rules_models['required'][0].rule(value))
-            if( empty && !rules.includes('required') ){console.log('not required',rules,empty,!rules.includes('required'));resolve({ valid: true, msg: "" })}
+            if( empty && !rules.includes('required') ){resolve({ valid: true, msg: "" })}
 
             rules.forEach(rule=>{
                 if(typeof rule === 'string'){

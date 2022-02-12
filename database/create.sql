@@ -6,14 +6,15 @@ USE `pharma`;
 CREATE TABLE IF NOT EXISTS`user` (
   `user_id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted` INT DEFAULT 0,
   `email` varchar(255),
   `phone_number` varchar(20),
   `address` varchar(255),
   `user_name` varchar(255),
-  `password` varchar(255)
+  `password` varchar(255),
+  `created_at` timestamp DEFAULT current_timestamp,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` INT DEFAULT 0,
+  `create_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`files` (
@@ -68,10 +69,7 @@ CREATE TABLE IF NOT EXISTS `doctors` (
 
 CREATE TABLE IF NOT EXISTS`medical_representative` (
   `representative_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255),
-  `address` varchar(255),
-  `phone` varchar(20),
-  `email` varchar(255),
+  `name` varcharvalidatersr(255),
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,

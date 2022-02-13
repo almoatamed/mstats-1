@@ -21,7 +21,6 @@ router.get('/',(req,res)=>{
                 res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in database connection'}}).end()
             }
             
-            
             if(result.length == 0){
                 const hash = await bcrypt.hash('admin',env.auth.bcrypt.rounds)
                 const seed_query = `

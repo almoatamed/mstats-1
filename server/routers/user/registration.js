@@ -67,9 +67,9 @@ router.post('/', user_middleware.auth, async (request, response)=>{
                     '${user_data.username}',
                     '${hash}',
                     '${user_data.name}',
-                    '${!!user_data.email?user_data.email:'null'}',
-                    '${!!user_data.phone?user_data.phone:'null'}',
-                    '${!!user_data.address?user_data.address:'null'}',
+                    ${!!user_data.email?"'"+user_data.email+"'":'null'},
+                    ${!!user_data.phone?"'"+user_data.phone+"'":'null'},
+                    ${!!user_data.address?"'"+user_data.address+"'":'null'},
                 );
             `
             connection.query(insertion_query, (err)=>{

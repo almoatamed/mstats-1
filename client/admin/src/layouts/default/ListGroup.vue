@@ -1,6 +1,6 @@
 <template>
   <v-list-group
-    :color="gradient !== 1 ? 'white' : undefined"
+    :color="gradient !== 2 ? 'white' : undefined"
     :group="group"
     :prepend-icon="item.icon"
     eager
@@ -20,7 +20,7 @@
       </v-list-item-avatar>
 
       <v-list-item-content v-if="item.title">
-        <v-list-item-title v-text="item.title" />
+        <v-list-item-title v-text="item.title.toUpperCase().slice(0,1) + item.title.toLowerCase().slice(1)" />
       </v-list-item-content>
     </template>
 
@@ -59,7 +59,7 @@
     },
 
     computed: {
-      gradient: get('user/drawer@gradient'),
+      gradient: get('user/visualization@drawer.gradient'),
       group () {
         return this.genGroup(this.item.items)
       },

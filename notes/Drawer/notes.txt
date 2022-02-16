@@ -1,0 +1,7 @@
+
+
+
+- make a nice gradiant. --
+- fix the drawer dark feature, to be based on the selected gradient -- 
+- fix title Camel case -- 
+- make group for user -- 

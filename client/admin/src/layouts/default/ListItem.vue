@@ -29,7 +29,7 @@
     </v-list-item-icon>
 
     <v-list-item-content v-if="item.title">
-      <v-list-item-title v-text="item.title" />
+      <v-list-item-title v-text="item.title.toUpperCase().slice(0,1) + item.title.toLowerCase().slice(1)" />
     </v-list-item-content>
   </v-list-item>
 </template>

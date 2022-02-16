@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Pathify
 import { make } from 'vuex-pathify'
 
@@ -8,40 +9,68 @@ const state = {
   mini: false,
   items: [
     {
-      title: 'Dashboard',
+      title: 'dashboard',
       icon: 'mdi-view-dashboard',
-      to: '/',
+      to: '/dashboard',
     },
     {
-      title: 'User Profile',
-      icon: 'mdi-account',
-      to: '/components/profile/',
+      title: "data entry",
+      icon: "mdi-pencil",
+      items: [
+        {
+          title: 'user', 
+          icon: 'mdi-account', 
+          items:[
+            {
+              title: "register", 
+              icon: "mdi-plus", 
+              to: "/dashboard/data-entry/user/register"
+            }
+          ]
+        },
+        {
+          title: 'Hospital', 
+          icon: 'mdi-hospital-building', 
+          items:[
+            {
+              title: "register", 
+              icon: "mdi-plus", 
+              to: "/dashboard/data-entry/hostpital/register"
+            }
+          ]
+        }
+      ],
     },
-    {
-      title: 'Regular Tables',
-      icon: 'mdi-clipboard-outline',
-      to: '/tables/regular/',
-    },
-    {
-      title: 'Typography',
-      icon: 'mdi-format-font',
-      to: '/components/typography/',
-    },
-    {
-      title: 'Icons',
-      icon: 'mdi-chart-bubble',
-      to: '/components/icons/',
-    },
-    {
-      title: 'Google Maps',
-      icon: 'mdi-map-marker',
-      to: '/maps/google/',
-    },
-    {
-      title: 'Notifications',
-      icon: 'mdi-bell',
-      to: '/components/notifications/',
-    },
+    // {
+    //   title: 'User Profile',
+    //   icon: 'mdi-account',
+    //   to: '/components/profile/',
+    // },
+    // {
+    //   title: 'Regular Tables',
+    //   icon: 'mdi-clipboard-outline',
+    //   to: '/tables/regular/',
+    // },
+    // {
+    //   title: 'Typography',
+    //   icon: 'mdi-format-font',
+    //   to: '/components/typography/',
+    // },
+    // {
+    //   title: 'Icons',
+    //   icon: 'mdi-chart-bubble',
+    //   to: '/components/icons/',
+    // },
+    // {
+    //   title: 'Google Maps',
+    //   icon: 'mdi-map-marker',
+    //   to: '/maps/google/',
+    // },
+    // {
+    //   title: 'Notifications',
+    //   icon: 'mdi-bell',
+    //   to: '/components/notifications/',
+    // },
   ],
 }
 

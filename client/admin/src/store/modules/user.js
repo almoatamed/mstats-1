@@ -21,6 +21,7 @@ const state = JSON.parse(localStorage.getItem('aramtech@user')) || {
       mini: false,
     },
     gradients: [
+      'rgb(6,76,134), rgb(6,76,134)',
       'rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)',
       'rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)',
       'rgba(244, 67, 54, .8), rgba(244, 67, 54, .8)',
@@ -140,16 +141,31 @@ const getters = {
 
   // visual getters 
   dark: (state, getters) => {
+    console.log('getiting dark')
     return (
       state.visualization.dark ||
-      getters.visualization.gradient.indexOf('255, 255, 255') === -1
+      getters.gradient.indexOf('255, 255, 255') === -1
     )
   },
+  dark_gradiant: (state ) =>{
+    console.log(state.visualization.drawer.gradient)
+    switch (state.visualization.drawer.gradient) {
+      case 0:
+        return true
+      case 1:
+        return true
+      case 3:
+        return true
+      default:
+        return false
+    }
+  },
   gradient: state => {
+    console.log('getiting gradient')
     return state.visualization.gradients[state.visualization.drawer.gradient]
   },
   image: state => {
-    return state.visualization.drawer.image === '' ? state.visualization.drawer.image : state.visualization.images[state.visualization.drawer.image]
+    return state.visualization.drawer.image === '' ? '' : state.visualization.images[state.visualization.drawer.image]
   },
 }
 

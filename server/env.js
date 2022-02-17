@@ -18,7 +18,7 @@ module.exports = {
         }
     },
     auth:{
-        seed_key:'1234asdf',
+        seed_key:'asdgfoiuasydviotqwoegvuiasydbviuewbjkbvuiasydgf',
         bcrypt:{
             rounds: 10
         },

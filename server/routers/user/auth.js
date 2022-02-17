@@ -47,7 +47,7 @@ router.post('/login',async (req,res)=>{
         connection.query(sql_query,async (err, result) => {
             if(err){
                 connection.release()
-                return res.status(env.response.status_codes.server_error).json({error:err, msg:'Error in database connection'}).end()
+                return res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in database connection'}}).end()
             }
             if(result.length == 0){
                 connection.release()
@@ -56,7 +56,7 @@ router.post('/login',async (req,res)=>{
             bcrypt.compare(user_data.password, result[0].password,(err,result)=>{
                 if(err){
                     connection.release()
-                    return res.status(env.response.status_codes.server_error).json({error:err, msg:'Error in bcrypt'}).end()
+                    return res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in bcrypt'}}).end()
                 }
                 if(!result){
                     connection.release()

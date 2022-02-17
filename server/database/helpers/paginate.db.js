@@ -27,11 +27,11 @@ module.exports = function(query, n_per_page, page=1){
                     (${query}) output, (SELECT @row_number:=0) as r
                 ) final
                 where 
-                final.nn between ${n_per_page*(page-1)} and ${n_per_page*(page) -1}
+                final.nn between ${n_per_page*(page-1) + 1} and ${n_per_page*(page)}
                 ;
             `
             result = await pq(paginate_query)
-            resolve(result)
+            resolve({result:{result, number_of_pages, page, n_per_page }})
             
         } catch (error) {
             reject({error:{err:error, msg:"server error", name:"pagination error"},status_code:env.response.status_codes.server_error})

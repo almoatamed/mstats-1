@@ -1,8 +1,16 @@
 /* eslint-disable */
 import axios from 'axios'
 import store from '../../store/index'
+
+// let baseURL = 'http://localhost:3000'
+// if(window.navigator.userAgent.indexOf('Linux') !== -1){
+//   baseURL = location.origin
+// }
+
+baseURL = location.origin
+
 const Api = axios.create({
-  baseURL: `${location.origin}/server/api/`,
+  baseURL: `${baseURL}/server/api/`,
 })
 
 Api.interceptors.request.use(function (config) {

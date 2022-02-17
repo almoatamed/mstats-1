@@ -7,7 +7,7 @@ import store from '../../store/index'
 //   baseURL = location.origin
 // }
 
-baseURL = location.origin
+let baseURL = location.origin
 
 const Api = axios.create({
   baseURL: `${baseURL}/server/api/`,

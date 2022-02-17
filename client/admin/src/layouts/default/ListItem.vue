@@ -5,6 +5,7 @@
     :target="item.href ? '_blank' : undefined"
     :to="item.to"
     active-class="primary white--text"
+    exact
     link
     class="py-1"
     v-bind="$attrs"

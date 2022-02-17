@@ -1,0 +1,10 @@
+
+
+- create factory get route --
+- in the range of the factory numbe of requests --
+  - generate random username and it must be unique -- 
+  - generate random name --
+  - set password to '1234'--
+  - set the rest to null --
+- create insertion query --
+- insert the data  --

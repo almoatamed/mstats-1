@@ -1,0 +1,6 @@
+
+
+username generator --
+
+- generate user name based on an initials of string and three random numbers --
+

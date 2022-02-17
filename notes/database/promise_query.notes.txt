@@ -1,0 +1,3 @@
+
+
+- create an easy utility way to perform queries by aquiring pool and by that perfom query into a promise --

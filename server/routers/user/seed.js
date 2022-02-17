@@ -69,18 +69,15 @@ router.get('/factory/:no',(req, res)=>{
         res.status(env.response.status_codes.invalid_field).json({error:{err:error,message:"Invalid number of factory", name:"factory error" }}).end()
     }
 
-    console.log('trying to parse int the params', number_of_entries)
 
     mysql.pool.getConnection(async(err,connection)=>{
         if(err){
             res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in database connection'}}).end()
         }
-        console.log('connection craeted')
 
         try {
             let password = '1234'
             const hash = await bcrypt.hash(password,env.auth.bcrypt.rounds)
-            console.log('hash created', hash)
             for (let index = 0; index < number_of_entries; index++) {
                 let name = gen.name(2)
 
@@ -88,7 +85,6 @@ router.get('/factory/:no',(req, res)=>{
                 while(!is_unique('user', 'user_name',username)){
                     username = gen.username(name)
                 } 
-                console.log('craeting user',name, username)
                 let insert_query = `
                     INSERT INTO user (name, user_name, password) VALUES(
                         '${name}', '${username}', '${hash}'

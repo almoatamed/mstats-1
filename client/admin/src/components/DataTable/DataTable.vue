@@ -94,6 +94,7 @@ export default {
         search: self.header.form.search || "",
         order_by: self.options.sortBy?.length > 0 ? self.options.sortBy : "",
         headers: self.headers.map(el => el.value),
+        search_fields: self.search_fields || null,
         page: self.options.page,
         n_per_page: self.options.itemsPerPage,
         asc:
@@ -161,6 +162,10 @@ export default {
     }
   }),
   props: {
+    search_fields:{
+      type: Array,
+      default:()=>(null)
+    },
     table_actions: {
       type: Object,
       default: () => ({})

@@ -2,6 +2,7 @@
   <!-- eslint-disable -->
   <filtered-data-table
     :deleted="0"
+    :search_fields="search_fields"
     :table_actions="table_actions"
     :headers="headers"
     api_url="/user/fetch"
@@ -65,7 +66,10 @@ export default {
           icon: "mdi-heart"
         }
       ]
-    }
+    },
+    search_fields:[
+      'user_name', 'name'
+    ]
   }),
   methods:{
     log(event){

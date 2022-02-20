@@ -53,21 +53,23 @@ router.post('/login',async (req,res)=>{
                 connection.release()
                 return res.status(env.response.status_codes.not_autharized).json({error:{name:'authentication error', msg:'Invalid username and password'}}).end()
             }
-            bcrypt.compare(user_data.password, result[0].password,(err,result)=>{
+            bcrypt.compare(user_data.password, result[0].password,(err,confimed_password)=>{
                 if(err){
                     connection.release()
                     return res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in bcrypt'}}).end()
                 }
-                if(!result){
+                if(!confimed_password){
                     connection.release()
                     return res.status(env.response.status_codes.not_autharized).json({error:{name:'authentication error', msg:'Invalid username and password'}}).end()
                 }
-                
+                console.log(result)
                 connection.release()
+                const token = jwt.generate({
+                    user_id: result[0].user_id,
+                })
+                console.log(user_data,result)
                 res.status(200).json({result: {
-                    token: jwt.generate({
-                        user_id: user_data.user_id,
-                    })
+                    token
                 }}).end()
             })
             

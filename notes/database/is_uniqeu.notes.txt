@@ -1,0 +1,5 @@
+
+
+- create a helper utility specialized in database that can detect if certain field used or not in 
+  a cerain tabl, and it need to be promise based --
+

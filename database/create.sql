@@ -6,14 +6,15 @@ USE `pharma`;
 CREATE TABLE IF NOT EXISTS`user` (
   `user_id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted` INT DEFAULT 0,
   `email` varchar(255),
   `phone_number` varchar(20),
   `address` varchar(255),
   `user_name` varchar(255),
-  `password` varchar(255)
+  `password` varchar(255),
+  `created_at` timestamp DEFAULT current_timestamp,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` INT DEFAULT 0,
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`files` (
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS`files` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`pharmacies` (
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS`pharmacies` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`hospitals` (
@@ -51,7 +52,7 @@ CREATE TABLE IF NOT EXISTS`hospitals` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS `doctors` (
@@ -63,19 +64,16 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`medical_representative` (
   `representative_id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
-  `address` varchar(255),
-  `phone` varchar(20),
-  `email` varchar(255),
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`manufacturers` (
@@ -87,7 +85,7 @@ CREATE TABLE IF NOT EXISTS`manufacturers` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`products` (
@@ -100,7 +98,7 @@ CREATE TABLE IF NOT EXISTS`products` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`prescriptions` (
@@ -109,7 +107,7 @@ CREATE TABLE IF NOT EXISTS`prescriptions` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`sheets` (
@@ -121,7 +119,7 @@ CREATE TABLE IF NOT EXISTS`sheets` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`doctor_hospital_relations` (
@@ -131,7 +129,7 @@ CREATE TABLE IF NOT EXISTS`doctor_hospital_relations` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`pharmacy_hospital_relations` (
@@ -141,7 +139,7 @@ CREATE TABLE IF NOT EXISTS`pharmacy_hospital_relations` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`doctor_medical_representative_relations` (
@@ -151,7 +149,7 @@ CREATE TABLE IF NOT EXISTS`doctor_medical_representative_relations` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
 CREATE TABLE IF NOT EXISTS`prescription_product_relations` (
@@ -161,24 +159,24 @@ CREATE TABLE IF NOT EXISTS`prescription_product_relations` (
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
-  `create_by_user` INT
+  `created_by_user` INT
 );
 
--- ALTER TABLE `pharmacies` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `pharmacies` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
--- ALTER TABLE `hospitals` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `hospitals` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
--- ALTER TABLE `doctors` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `doctors` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
--- ALTER TABLE `medical_representative` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `medical_representative` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
--- ALTER TABLE `manufacturers` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `manufacturers` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `products` ADD FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`manufacturer_id`);
 
--- ALTER TABLE `products` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `products` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
--- ALTER TABLE `prescriptions` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `prescriptions` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `sheets` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`);
 
@@ -186,28 +184,28 @@ CREATE TABLE IF NOT EXISTS`prescription_product_relations` (
 
 -- ALTER TABLE `sheets` ADD FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`pharmacy_id`);
 
--- ALTER TABLE `sheets` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `sheets` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `doctor_hospital_relations` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`);
 
 -- ALTER TABLE `doctor_hospital_relations` ADD FOREIGN KEY (`hospital_id`) REFERENCES `hospitals` (`hospital_id`);
 
--- ALTER TABLE `doctor_hospital_relations` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `doctor_hospital_relations` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `pharmacy_hospital_relations` ADD FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`pharmacy_id`);
 
 -- ALTER TABLE `pharmacy_hospital_relations` ADD FOREIGN KEY (`hospital_id`) REFERENCES `hospitals` (`hospital_id`);
 
--- ALTER TABLE `pharmacy_hospital_relations` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `pharmacy_hospital_relations` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `doctor_medical_representative_relations` ADD FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`);
 
 -- ALTER TABLE `doctor_medical_representative_relations` ADD FOREIGN KEY (`representative_id`) REFERENCES `medical_representative` (`representative_id`);
 
--- ALTER TABLE `doctor_medical_representative_relations` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `doctor_medical_representative_relations` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);
 
 -- ALTER TABLE `prescription_product_relations` ADD FOREIGN KEY (`prescription_id`) REFERENCES `prescriptions` (`prescription_id`);
 
 -- ALTER TABLE `prescription_product_relations` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
--- ALTER TABLE `prescription_product_relations` ADD FOREIGN KEY (`create_by_user`) REFERENCES `user` (`user_id`);
+-- ALTER TABLE `prescription_product_relations` ADD FOREIGN KEY (`created_by_user`) REFERENCES `user` (`user_id`);

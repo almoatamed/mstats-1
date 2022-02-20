@@ -251,6 +251,7 @@
     data: () => ({
       color: '#E91E63',
       colors: [
+        '#064c86',
         '#9C27b0',
         '#00CAE3',
         '#4CAF50',
@@ -268,19 +269,20 @@
         'drawerImage',
         'mini',
       ]),
-      ...sync('user', [
-        'drawer@gradient',
-        'drawer@image',
-      ]),
-      ...get('user', [
-        'images',
-        'gradients',
-      ]),
+      ...sync('user', {
+        gradient: 'visualization@drawer.gradient',
+        image: 'visualization@drawer.image',
+      }),
+      ...get('user', {
+        images: 'visualization@images',
+        gradients: 'visualization@gradients',
+      }),
     },
 
     watch: {
       color (val) {
-        this.$vuetify.theme.themes[this.isDark ? 'dark' : 'light'].primary = val
+        this.$vuetify.theme.themes.light.primary = val
+        this.$vuetify.theme.themes.dark.primary = val
       },
     },
   }

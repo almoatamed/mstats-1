@@ -95,10 +95,10 @@ the company wants to know
 - create auth middle ware --
 - create nginx server --
 - create user registration page
-- create user registration api 
+- create user registration api --
 - create pagination strategy on server, using indexing on any select query, with limiting to specific number of 
   results, while counting the total number of results for numbering pages with specific page request 
-  if page is out of range then redirect to 404
+  if page is out of range then redirect to 404 --
 - create users view page 
 - create users fetch with pagination api 
 - craete user detail page (edit page) where yo show details and recent logs related to user 

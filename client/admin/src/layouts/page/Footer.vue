@@ -11,11 +11,8 @@
 
 <script>
   // Components
-  import Links from '@/components/Links'
 
   export default {
     name: 'PageFooter',
-
-    components: { Links },
   }
 </script>

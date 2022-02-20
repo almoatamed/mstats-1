@@ -99,6 +99,7 @@
     }), 
 
     created(){
+      console.log('hi from login')
       this.loading_cover = true
       this.$store.dispatch('user/verify', null, {root:true}).then((res)=>{
         this.loading_cover = false 

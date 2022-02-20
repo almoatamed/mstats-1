@@ -2,7 +2,7 @@
   <v-navigation-drawer
     id="default-drawer"
     v-model="drawer"
-    :dark="dark"
+    :dark="dark_gradiant"
     :right="$vuetify.rtl"
     :src="drawerImage ? image : ''"
     :mini-variant.sync="mini"
@@ -10,6 +10,7 @@
     app
     width="260"
   >
+    <!-- Drawer color -->
     <template
       v-if="drawerImage"
       #img="props"
@@ -21,6 +22,7 @@
       />
     </template>
 
+    <!-- Drawer Body (content) -->
     <div class="px-2">
       <default-drawer-header />
 
@@ -29,6 +31,7 @@
       <default-list :items="items" />
     </div>
 
+    <!-- Drawer Footer -->
     <template #append>
       <div class="pa-4 text-center">
         <app-btn
@@ -70,7 +73,7 @@
     components: {
       DefaultDrawerHeader: () => import(
         /* webpackChunkName: "default-drawer-header" */
-        './widgets/DrawerHeader'
+        '../widgets/DrawerHeader'
       ),
       DefaultList: () => import(
         /* webpackChunkName: "default-list" */
@@ -80,9 +83,9 @@
 
     computed: {
       ...get('user', [
-        'visualization@dark',
-        'visualization@gradient',
-        'visualization@image',
+        'dark_gradiant',
+        'gradient',
+        'image',
       ]),
       ...get('app', [
         'items',

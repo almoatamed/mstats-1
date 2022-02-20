@@ -1,0 +1,23 @@
+
+
+
+- create a view for datatable --
+- create a route for that view --
+- in the view --
+  - create a card --
+  - create title/subtitle --
+  - create search field --
+  - create card body --
+  - create v-data-table --
+  - sync data table options with Api fetch --
+  - craete server side fetch from database --
+  - sync sort --
+  - sync pages --
+  - sync items --
+  - make a watcher for optinos --
+  - make search --
+  - make filters component --
+  - make datetime filter component -- 
+  - make user filter component -- 
+  - convert table to component --
+- create user status table --

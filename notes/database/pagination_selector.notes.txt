@@ -1,0 +1,6 @@
+
+- craete a utility that perform a custom select query and return certain page with certain number of results  --
+- the utility should take three argument and return a promise either result (empty or not) or catch 
+  ( an error occured) --
+- the three argument are ( the custom select query), ( the number of results ) , and ( page number ) --
+- returns 404 if page number != 1 and page number out of range of valid pages --

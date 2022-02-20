@@ -1,8 +1,17 @@
 /* eslint-disable */
 import axios from 'axios'
 import store from '../../store/index'
+
+// let baseURL = 'http://localhost:3000'
+// if(window.navigator.userAgent.indexOf('Linux') !== -1){
+//   baseURL = location.origin
+// }
+
+let baseURL = location.origin
+console.log(baseURL)
 const Api = axios.create({
-  baseURL: `${location.origin}/server/api/`,
+  timeout: 2000,
+  baseURL: `${baseURL}/server/api/`,
 })
 
 Api.interceptors.request.use(function (config) {
@@ -15,8 +24,9 @@ Api.interceptors.request.use(function (config) {
 Api.interceptors.response.use(function(response){
     return response
 }, function (error) {
+    console.log(error.name, error.message, error.code)
     const response = error.response
-    if(response.status == 421){
+    if(response?.status == 421){
         store.dispatch('user/logout',null, {root:true})
     }
     return new Promise((resulve, reject)=>{reject(error)})

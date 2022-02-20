@@ -1,2 +1,2 @@
-create user 'admin'@'localhost' identified by 'admin';
-grant all privileges on *.* to 'admin'@'localhost' with grant options;
+Create USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;

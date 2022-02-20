@@ -13,6 +13,7 @@ module.exports = {
         mysql: {
             host: "localhost",
             user: "admin",
+            socketPath: '/tmp/mysql.sock',
             password: "admin",
             database: "pharma"
         }
@@ -23,7 +24,7 @@ module.exports = {
             rounds: 10
         },
         jwt:{
-            secret: "hah!whats_wrong?"
+            secret: "shhhhhh"
         }
     }
 }

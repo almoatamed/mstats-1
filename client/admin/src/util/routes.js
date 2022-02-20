@@ -52,10 +52,10 @@ export function redirect (
   }
 }
 
-export function route (name, component, path = '') {
+export function route (name, component, path = '', fullPath = undefined) {
   component = Object(component) === component
     ? component
-    : { default: name.replace(' ', '') }
+    : { default: fullPath || name.replace(' ', '') }
 
   const components = {}
 

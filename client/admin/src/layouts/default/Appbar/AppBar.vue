@@ -44,23 +44,23 @@
     components: {
       DefaultAccount: () => import(
         /* webpackChunkName: "default-account" */
-        './widgets/Account'
+        '../widgets/Account'
       ),
       DefaultDrawerToggle: () => import(
         /* webpackChunkName: "default-drawer-toggle" */
-        './widgets/DrawerToggle'
+        '../widgets/DrawerToggle'
       ),
       DefaultGoHome: () => import(
         /* webpackChunkName: "default-go-home" */
-        './widgets/GoHome'
+        '../widgets/GoHome'
       ),
       DefaultNotifications: () => import(
         /* webpackChunkName: "default-notifications" */
-        './widgets/Notifications'
+        '../widgets/Notifications'
       ),
       DefaultSearch: () => import(
         /* webpackChunkName: "default-search" */
-        './widgets/Search'
+        '../widgets/Search'
       ),
     },
 

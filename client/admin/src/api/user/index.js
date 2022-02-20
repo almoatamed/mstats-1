@@ -20,5 +20,14 @@ export default {
                 reject(err)
             })
         })
+    }, 
+    fetch(body){
+        return new Promise((resolve, reject)=>{
+            Api.post('user/fetch', body).then(res=>{
+                resolve(res)
+            }).catch(err=>{
+                reject(err)
+            })
+        })
     }
 }

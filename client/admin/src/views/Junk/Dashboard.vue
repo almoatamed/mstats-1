@@ -284,6 +284,9 @@
           },
         },
       }],
+      //
+      //
+
       headers: [
         {
           sortable: false,
@@ -351,6 +354,9 @@
           salary: '$63,542',
         },
       ],
+
+      //
+      //
       stats: [
         {
           actionIcon: 'mdi-alert',

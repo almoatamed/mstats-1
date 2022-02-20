@@ -73,7 +73,7 @@
     components: {
       DefaultDrawerHeader: () => import(
         /* webpackChunkName: "default-drawer-header" */
-        './widgets/DrawerHeader'
+        '../widgets/DrawerHeader'
       ),
       DefaultList: () => import(
         /* webpackChunkName: "default-list" */

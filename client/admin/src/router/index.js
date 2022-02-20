@@ -23,17 +23,12 @@ const router = new Router({
 
     {
       ...layout('Page', [
-        {
-          ...route('Login'),
-          meta:{requiresVisitor:true},
-        },
-
-        // Errors
+        // Junk
         route('Error', null, 'error'),
-
-        // Suppport Page
         route('Support', null, 'support'),
 
+        // Auth
+        route('Login',null,'','Auth/Login.vue'),
       ]),
       meta:{
       }
@@ -42,21 +37,18 @@ const router = new Router({
 
     {
       ...layout('Default', [
-        route('Dashboard'),
+        // Junk
+        route('Dashboard',null,'','Junk/Dashboard.vue'),
+        route('UserProfile', null, 'components/profile','Junk/UserProfile.vue'),
+        route('Notifications', null, 'components/notifications','Junk/Notifications.vue'),
+        route('Icons', null, 'components/icons','Junk/Icons.vue'),
+        route('Typography', null, 'components/typography','Junk/Typography.vue'),
+        route('Regular Tables', null, 'tables/regular','Junk/RegularTabbles.vue'),
+        route('Google Maps', null, 'maps/google','Junk/GoogleMaps.vue'),
 
-        // Pages
-        route('UserProfile', null, 'components/profile'),
+        // User
+        route('User Status Table', null,'user/status_table', 'User/UserStatusTable.vue')
 
-        // Components
-        route('Notifications', null, 'components/notifications'),
-        route('Icons', null, 'components/icons'),
-        route('Typography', null, 'components/typography'),
-
-        // Tables
-        route('Regular Tables', null, 'tables/regular'),
-
-        // Maps
-        route('Google Maps', null, 'maps/google'),
       ], '/dashboard'),
       meta:{RequiresAuth:true}
     },

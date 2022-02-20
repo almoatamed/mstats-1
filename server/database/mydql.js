@@ -7,7 +7,7 @@ if(process.platform == 'linux'){
 }
 
 
-const pool = mysql.createPool(env.db.mysql);
+const pool = mysql.createPool(mysql_configuration);
 
 module.exports = {
     pool,     

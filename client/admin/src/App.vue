@@ -24,11 +24,9 @@
   /* eslint-disable */
   // Styles
   import '@/styles/overrides.sass'
-import LoadingCover from './components/LoadingCover.vue'
 import {sync} from 'vuex-pathify'
 
   export default {
-  components: { LoadingCover },
     name: 'App',
     metaInfo: {
       title: 'Smart Prescription',

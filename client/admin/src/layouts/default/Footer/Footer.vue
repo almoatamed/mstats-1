@@ -1,9 +1,10 @@
 <template>
   <v-footer
-    id="page-footer"
-    :absolute="$vuetify.breakpoint.mdAndUp"
+    id="default-footer"
     color="transparent"
-    height="auto"
+    absolute
+    app
+    inset
   >
     <links />
   </v-footer>
@@ -13,6 +14,6 @@
   // Components
 
   export default {
-    name: 'PageFooter',
+    name: 'DefaultFooter',
   }
 </script>

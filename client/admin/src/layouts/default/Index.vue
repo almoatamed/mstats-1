@@ -19,23 +19,23 @@
     components: {
       DefaultBar: () => import(
         /* webpackChunkName: "default-app-bar" */
-        './AppBar'
+        './Appbar/AppBar'
       ),
       DefaultDrawer: () => import(
         /* webpackChunkName: "default-drawer" */
-        './Drawer'
+        './Drawer/Drawer'
       ),
       DefaultFooter: () => import(
         /* webpackChunkName: "default-footer" */
-        './Footer'
+        './Footer/Footer'
       ),
       DefaultSettings: () => import(
         /* webpackChunkName: "default-settings" */
-        './Settings'
+        './widgets/Settings'
       ),
       DefaultView: () => import(
         /* webpackChunkName: "default-view" */
-        './View'
+        './Body/View'
       ),
     },
   }

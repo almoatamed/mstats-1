@@ -24,7 +24,7 @@ module.exports = {
             rounds: 10
         },
         jwt:{
-            secret: "hah!whats_wrong?"
+            secret: "shhhhhh"
         }
     }
 }

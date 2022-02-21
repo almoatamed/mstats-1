@@ -7,6 +7,9 @@ the application is used mainly for marketing perpuses, in this case it used to c
   - medical representetives
   - doctors 
   - pharmacy 
+  - hospital
+  - user ( the admin )
+
 
 the company wants to know
   - the details of the doctor

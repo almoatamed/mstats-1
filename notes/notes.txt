@@ -100,7 +100,7 @@ the company wants to know
   results, while counting the total number of results for numbering pages with specific page request 
   if page is out of range then redirect to 404 --
 - create users view page 
-- create users fetch with pagination api 
+- create users fetch with pagination api --
 - craete user detail page (edit page) where yo show details and recent logs related to user 
 - create 404 page 
 - create logout action --
@@ -108,19 +108,19 @@ the company wants to know
 - create user load action on startup/login from local storage --
 - create user setting save to localstorage on logout or app.vue is destroyed --
 - create hospital registration page from 
-- create hospital registration api 
+- create hospital registration api --
 - create pharmacy registration page 
 - create pharmacy registration api with password and username for later use on the pharmacy app 
 - create pharmacies table page 
 - create pharmacy details page (edit page) where pharmacy is to be edited 
 - create medical representative registration page 
-- create medical rep api 
+- create medical rep api --
 - create med reps table page 
 - create med rep detail page 
 - create doctor registration page 
 - create doctor registration api 
 - create doctors table page 
-- create doctors details page where you 
+- create doctors details page
 - create product registration page with photo upload
 - create product and file registration api for products using multer 
 - create static file api access using express static on route /api/public --

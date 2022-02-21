@@ -16,8 +16,7 @@ const jwt = require('../../utils/jwt/index')
 const router = express.Router();
 
 router.post('/verify', user_middlewares.auth, (req,res)=>{
-    console.log('verifying', request)
-    res.status(200).json({result:{name:'valid', msg:'verified user'}}).end()
+    return res.status(200).json({result:{name:'valid', msg:'verified user'}}).end()
 })
 
 router.post('/login',async (req,res)=>{
@@ -38,7 +37,7 @@ router.post('/login',async (req,res)=>{
     // authentication
     mysql.pool.getConnection((err,connection)=>{
         if(err){
-            res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in database connection'}}).end()
+            return res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in database connection'}}).end()
         }
         
         const sql_query = `
@@ -62,13 +61,11 @@ router.post('/login',async (req,res)=>{
                     connection.release()
                     return res.status(env.response.status_codes.not_autharized).json({error:{name:'authentication error', msg:'Invalid username and password'}}).end()
                 }
-                console.log(result)
                 connection.release()
                 const token = jwt.generate({
                     user_id: result[0].user_id,
                 })
-                console.log(user_data,result)
-                res.status(200).json({result: {
+                return res.status(200).json({result: {
                     token
                 }}).end()
             })

@@ -70,6 +70,9 @@ CREATE TABLE IF NOT EXISTS `doctors` (
 CREATE TABLE IF NOT EXISTS`medical_representative` (
   `representative_id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
+  `address` varchar(255),
+  `phone` varchar(20),
+  `email` varchar(255),
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,

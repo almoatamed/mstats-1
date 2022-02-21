@@ -4,14 +4,11 @@ const mysql = require('../database/mydql')
 
 module.exports = {
     auth: (req,res,next)=>{
-        console.log('hi there')
         const token = req.headers['authorization']
         if(!token){ return res.status(421).json({error:{name:'unautharized', msg:"unautharized action"}}).end()}
         jwt.verify(token,(err,user)=>{
             if(err){ return res.status(421).json({error:{name:'unautharized', msg:"unautharized action"}}).end()}
             else {
-                req.user = user
-                console.log(user)
                 const select_query = `
                     select * from user where user_id = ${user.user_id} and deleted = 0 limit 1;
                 `
@@ -30,7 +27,9 @@ module.exports = {
                             return res.status(421).json({error:{name:'unautharized', msg:"unautharized action"}}).end()
                         }
                         connection.release()
-                        next()
+
+                        req.user = result[0]
+                        return next()
                     })
                 })
             }            

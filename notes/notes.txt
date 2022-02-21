@@ -7,6 +7,9 @@ the application is used mainly for marketing perpuses, in this case it used to c
   - medical representetives
   - doctors 
   - pharmacy 
+  - hospital
+  - user ( the admin )
+
 
 the company wants to know
   - the details of the doctor
@@ -84,8 +87,8 @@ the company wants to know
 - create Login Page -- 
   - create route based on layout --
   - create layout for login --
-- create axios api 
-- create login axios api
+- create axios api --
+- create login axios api --
 - create express server --
 - create database connection --
 - create user seeder --
@@ -94,7 +97,7 @@ the company wants to know
 - create login route --
 - create auth middle ware --
 - create nginx server --
-- create user registration page
+- create user registration page 
 - create user registration api --
 - create pagination strategy on server, using indexing on any select query, with limiting to specific number of 
   results, while counting the total number of results for numbering pages with specific page request 
@@ -107,10 +110,10 @@ the company wants to know
 - create user state managment --
 - create user load action on startup/login from local storage --
 - create user setting save to localstorage on logout or app.vue is destroyed --
-- create hospital registration page from 
+- create hospital registration
 - create hospital registration api --
 - create pharmacy registration page 
-- create pharmacy registration api with password and username for later use on the pharmacy app 
+- create pharmacy registration api with password and username for later use on the pharmacy app --
 - create pharmacies table page 
 - create pharmacy details page (edit page) where pharmacy is to be edited 
 - create medical representative registration page 
@@ -118,7 +121,7 @@ the company wants to know
 - create med reps table page 
 - create med rep detail page 
 - create doctor registration page 
-- create doctor registration api 
+- create doctor registration api --
 - create doctors table page 
 - create doctors details page
 - create product registration page with photo upload

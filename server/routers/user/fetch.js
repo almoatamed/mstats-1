@@ -22,11 +22,13 @@ router.post('/user_names', user_middleware.auth, async (request, response)=>{
         `
         let users_names = await pq(query)
         users_names = users_names.map(el=>{return el.user_name})
-        response.status(env.response.status_codes.ok).json({result:{names:users_names}})
+        return response.status(env.response.status_codes.ok).json({result:{names:users_names}})
     }catch (error){
-        response.status(env.response.status_codes.server_error).json({
-            error:{err:error, msg:"server error", name:"user fetch names error"}
-        }).end()
+        if(!response.headersSent){
+            return response.status(env.response.status_codes.server_error).json({
+                error:{err:error, msg:"server error", name:"user fetch names error"}
+            }).end()
+        }
     }
 })
 
@@ -37,14 +39,16 @@ router.post('/',user_middleware.auth, (request,response)=>{
         query_body.search_fields = query_body.search_fields?.length >0 ? query_body.search_fields : ['user_name', 'phone_number', 'address', 'name']
         query_body.selected_fields = query_body.headers?.length > 0 ? query_body.headers : [ 'user_name', 'phone_number', 'address', 'name', 'updated_at']
         tq('user', query_body).then(result=>{
-            response.status(env.response.status_codes.ok).json(result).end()
+            return response.status(env.response.status_codes.ok).json(result).end()
         }).catch(err=>{
-            response.status(err.status_code).json(err).end()
+            return response.status(err.status_code).json(err).end()
         })
     }catch (error){
-        response.status(env.response.status_codes.server_error).json({
-            error:{err:error, msg:"server error", name:"user fetch error"}
-        }).end()
+        if(!response.headersSent){
+            return response.status(env.response.status_codes.server_error).json({
+                error:{err:error, msg:"server error", name:"user fetch error"}
+            }).end()
+        }
     }
 
 })

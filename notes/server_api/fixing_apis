@@ -1,0 +1,21 @@
+
+
+
+-------- user -------------
+- user/seeders --
+- user/auth --
+- main --
+- user/main -- 
+- user/registration --
+- user/fetch/usernames -- 
+- user/fetch --
+
+------- pharmacy -----------
+- registration -- 
+
+------- Doctor ------------
+- registration -- 
+
+-------- med rep -------------
+- registration -- 
+

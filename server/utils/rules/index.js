@@ -17,41 +17,44 @@ module.exports = async (rules, value,field)=>{
     }
     return new Promise(async (resolve, reject)=>{
         if( typeof rules === 'undefined'){
-             resolve({ valid: true, msg: "" })
+             return resolve({ valid: true, msg: "" })
         }else if (typeof rules === 'string'){
             
-            const empty = ! (await rules_models['required'][0].rule(value))
-            if( empty && 'required' != rules ){resolve({ valid: true, msg: "" })}
+            const empty = ! (rules_models['required'][0].rule(value))
+            if( empty && 'required' != rules ){return resolve({ valid: true, msg: "" })}
 
 
             if(rules in rules_models){
-                Object.values(rules_models[rules]).forEach(rule=>{
-                    if(!rule.rule(value)){resolve({ valid: false, msg: rule.msg(field) })}
-                })
-                resolve({ valid: true, msg: "" })
+                const rules = Object.values(rules_models[rules])
+                for(rule of rules){
+                    console.log('validating rules', rules)
+                    if(!rule.rule(value)){return resolve({ valid: false, msg: rule.msg(field) })}
+                }
+                return resolve({ valid: true, msg: "" })
             }else{
-                resolve({ valid: true, msg: "" } )
+                return resolve({ valid: true, msg: "" } )
             }
         }else if ( typeof rules === 'object'){
             rules = Object.values(rules)
             
-            const empty = ! (await rules_models['required'][0].rule(value))
-            if( empty && !rules.includes('required') ){resolve({ valid: true, msg: "" })}
+            const empty = ! (rules_models['required'][0].rule(value))
+            if( empty && ! rules.includes('required') ){return resolve({ valid: true, msg: "" })}
 
-            rules.forEach(rule=>{
+            for(rule of rules){
                 if(typeof rule === 'string'){
                     if(rules_models[rule]){
-                        Object.values(rules_models[rule]).forEach(sub_rule=>{
-                            if(!sub_rule.rule(value)){resolve({ valid: false, msg: sub_rule.msg(field) })}
-                        })
+                        const sub_rules = Object.values(rules_models[rule])
+                        for(sub_rule of sub_rules){
+                            if(!sub_rule.rule(value)){return resolve({ valid: false, msg: sub_rule.msg(field) })}
+                        }
                     }else{
                         console.error("Rule Not Fount: ", rule )
                     }
                 }else{
-                    if(!rule.rule(value)){resolve({ valid: false, msg: rule.msg(field) })}
+                    if(!rule.rule(value)){return resolve({ valid: false, msg: rule.msg(field) })}
                 }
-            })
-            resolve({ valid: true, msg: "" })
+            }
+            return resolve({ valid: true, msg: "" })
         }
     })
 }

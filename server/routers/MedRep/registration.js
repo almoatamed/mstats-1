@@ -1,85 +1,84 @@
-// router instance 
-const express = require('express')
-const router  = express.Router()
+// router instance
+const express = require("express");
+const router = express.Router();
 
-// env 
-const env = require('../../env')
+// env
+const env = require("../../env");
 
 // authenticater
-const user_middleware    = require('../../middlewares/user.middleware')
-// rules 
-const rules   = require('../../utils/rules/index')
+const user_middleware = require("../../middlewares/user.middleware");
+
+// rules
+const mutirules = require("../../utils/rules/multirules");
 
 // database pool
-const pool    = require('../../database/mydql')
-const res = require('express/lib/response')
+const uq = require("../../database/helpers/is_unique.db");
+const pq = require("../../database/helpers/promise_query.db");
 
-
-
-
-router.post('/', user_middleware.auth, async (request, response)=>{
-    const MedRep_data = request.body
+router.post("/", user_middleware.auth, async (request, response) => {
+  try {
+    const MedRep_data = request.body;
 
     //validation
     const validaters = [
-        [['required', 'name'], MedRep_data.name, 'name'],
-        [['email'], MedRep_data.email, 'email'],
-        [['phone'], MedRep_data.phone, 'phone'],
-        [['address'], MedRep_data.address, 'address'],
+      [["required", "name"], MedRep_data.name, "name"],
+      [["email"], MedRep_data.email, "email"],
+      [["phone"], MedRep_data.phone, "phone"],
+      [["address"], MedRep_data.address, "address"],
     ];
+    const valid = await mutirules(validaters);
+    if (!valid.valid) {
+      response
+        .status(env.response.status_codes.invalid_field)
+        .json({ error: { name: "Invalid Field", msg: valid.msg } })
+        .end();
+    }
 
-    validaters.forEach(async  validater=>{
-        const valid = await rules(validater[0])
-        if(!valid.valid){
-            res.status(env.response.status_codes.invalid_field).json({error:{name:'Invalid Field', msg:valid.msg}}).end()
-        }
-    })
+    // verify that MedRep name is unique
+    const unique = await uq("medical_representative", "name", MedRep_data.name);
+    if (!unique) {
+      return response
+        .status(env.response.status_codes.repeated_query)
+        .json({
+          error: {
+            name: "Medical Representative Registration Error",
+            msg: "This Medical Representative Name is used",
+          },
+        })
+        .end();
+    }
 
-      //registration 
-      pool.pool.getConnection(async (err, connection )=>{
-        if(err){
-            res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in database connection'}}).end()
-        }
+    // insert new Medical Representative
+    const insertion_query = `
+               INSERT INTO medical_representative(name, email, phone, address, created_by_user) VALUES(
+                   '${MedRep_data.name}',
+                   '${!!MedRep_data.email ? MedRep_data.email : "null"}',
+                   '${!!MedRep_data.phone ? MedRep_data.phone : "null"}',
+                   '${
+                     !!MedRep_data.address ? MedRep_data.address : "null"
+                   }',
+                   ${request.user.user_id}
+               );
+           `;
+    await pq(insertion_query);
+    response
+      .status(env.response.status_codes.ok)
+      .json({ result: { msg: "Medical Representative created" } })
+      .end();
+  } catch (error) {
+    if(!response.headersSent){
+      return response
+        .status(env.response.status_codes.server_error)
+        .json({
+          error: {
+            err: error,
+            name: "Medical Representative Registration Error",
+            msg: "Error while registring Medical Representative",
+          },
+        })
+        .end();
+    }
+  }
+});
 
-         // verify that MedRep name is unique 
-         const check_if_exists_query =  `
-         SELECT * FROM medical_representative WHERE name = '${MedRep_data.name}' LIMIT 1;
-     `
-     connection.query(check_if_exists_query, async (err, result)=>{
-         if(err){
-             connection.release()
-             res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in verifying unique Medical representative'}}).end()
-         }
-         
-         if(result.length >0){
-             connection.release()
-             res.status(env.response.status_codes.repeated_query).json({
-                 error:{name:"Medical representative exists", message: "Medical representative already exists"},
-             }).end()
-         }
-
- 
-         // insert new user
-         const insertion_query = `
-             INSERT INTO medical_representative(name, email, phone, address) VALUES(
-                 '${hospital_data.name}',
-                 '${!!hospital_data.email?hospital_data.email:'null'}',
-                 '${!!hospital_data.phone?hospital_data.phone:'null'}',
-                 '${!!hospital_data.address?hospital_data.address:'null'}',
-             );
-         `
-         connection.query(insertion_query, (err)=>{
-             if(err){
-                 connection.release()
-                 res.status(env.response.status_codes.server_error).json({error:{err, msg:'Error in creating Medical representative'}}).end()
-             }
-             connection.release()
-             res.status(env.response.status_codes.ok).json({result:{msg:'Medical representative created'}}).end()
-         })
-     })
- })
-})
-
-
-
-module.exports = router
+module.exports = router;

@@ -1,7 +1,7 @@
 module.exports = {
     response:{
         status_codes:{
-            invalid_field:401,
+            invalid_field:400,
             not_autharized:421,
             not_found:404,
             server_error:500,

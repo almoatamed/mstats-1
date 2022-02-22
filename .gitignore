@@ -26,7 +26,7 @@ yarn-error.log*
 *.sln
 *.sw*
 *.test.* 
-
+server/public
 .release-it.json
 now.json
 

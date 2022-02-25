@@ -18,7 +18,7 @@ const tq = require('../../database/helpers/table_query.db')
 router.post('/user_names', user_middleware.auth, async (request, response)=>{
     try{
         const query = `
-            select user_name from user
+            select user_name from user where deleted = 0
         `
         let users_names = await pq(query)
         users_names = users_names.map(el=>{return el.user_name})

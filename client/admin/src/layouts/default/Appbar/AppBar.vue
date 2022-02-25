@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <v-app-bar
     id="default-app-bar"
     app
@@ -19,15 +20,24 @@
 
     <v-toolbar-title
       class="font-weight-light text-h5"
-      v-text="name"
+      v-text="name.replace(/([a-z0-9])([A-Z])/g, '$1 $2')"
     />
+    <div class="pl-4" v-if="isIcons">
+      <v-icon
+        v-for="(icon,index) in appbarPageButtonns"
+        :key="index"
+        class="primary--text text-h2"
+        @click="$router.push(icon.path)"
+      >
+        {{icon.icon}}
+      </v-icon>
+    </div>
 
     <v-spacer />
 
     <default-search class="hidden-sm-and-down" />
 
     <default-go-home />
-
     <default-notifications />
 
     <default-account />
@@ -35,6 +45,7 @@
 </template>
 
 <script>
+  /* eslint-disable */
   // Utilities
   import { get, sync } from 'vuex-pathify'
 
@@ -68,8 +79,16 @@
       ...sync('app', [
         'drawer',
         'mini',
+        'appbarPageButtonnsCollections'
       ]),
       name: get('route/name'),
-    },
+      appbarPageButtonns(){
+        console.log(this.appbarPageButtonnsCollections)
+        return this.appbarPageButtonnsCollections[this.$route.name]
+      },
+      isIcons(){
+        return this.appbarPageButtonns?.length > 0
+      }
+    }
   }
 </script>

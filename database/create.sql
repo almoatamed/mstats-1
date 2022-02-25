@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS`hospitals` (
 CREATE TABLE IF NOT EXISTS `doctors` (
   `doctor_id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
+  `speciality` varchar(255),
   `address` varchar(255),
   `phone` varchar(20),
   `email` varchar(255),
@@ -148,6 +149,16 @@ CREATE TABLE IF NOT EXISTS`pharmacy_hospital_relations` (
 CREATE TABLE IF NOT EXISTS`doctor_medical_representative_relations` (
   `relation_id` INT PRIMARY KEY AUTO_INCREMENT,
   `doctor_id` INT,
+  `representative_id` INT,
+  `created_at` timestamp DEFAULT current_timestamp,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` INT DEFAULT 0,
+  `created_by_user` INT
+);
+
+CREATE TABLE IF NOT EXISTS`product_medical_representative_relations` (
+  `relation_id` INT PRIMARY KEY AUTO_INCREMENT,
+  `product_id` INT,
   `representative_id` INT,
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

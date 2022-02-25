@@ -25,6 +25,7 @@ const mime_condition = (mimetypes, file) => {
 };
 
 module.exports = (field_name, required, file_size, mimetypes, limit) => {
+  console.log(field_name, required, file_size, mimetypes, limit)
   const files_limits = limits(limit,file_size)
   return [
     multer({

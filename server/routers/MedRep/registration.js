@@ -14,10 +14,14 @@ const mutirules = require("../../utils/rules/multirules");
 // database pool
 const uq = require("../../database/helpers/is_unique.db");
 const pq = require("../../database/helpers/promise_query.db");
+const eq = require('../../database/helpers/exists.db')
+const rq = require('../../database/helpers/many_to_many_relations.db')
 
 router.post("/", user_middleware.auth, async (request, response) => {
   try {
     const MedRep_data = request.body;
+
+    await eq.valdiate_arr('products','name',MedRep_data.products)
 
     //validation
     const validaters = [
@@ -61,6 +65,23 @@ router.post("/", user_middleware.auth, async (request, response) => {
                );
            `;
     await pq(insertion_query);
+
+
+    await rq.insert_arr(
+      'product_medical_representative_relations',
+      'medical_representative',
+      'representative_id',
+      'name',
+      MedRep_data.name,
+      'products',
+      'product_id',
+      'name',
+      MedRep_data.products,
+      request
+    )
+
+
+
     response
       .status(env.response.status_codes.ok)
       .json({ result: { msg: "Medical Representative created" } })

@@ -21,6 +21,7 @@ const state = JSON.parse(localStorage.getItem('aramtech@user')) || {
       mini: false,
     },
     gradients: [
+      '',
       'rgb(6,76,134), rgb(6,76,134)',
       'rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)',
       'rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)',
@@ -53,14 +54,16 @@ const mutations = {
     state.auth.token = value
   },
   NOTIFY(state, notification){
+    console.log('pushing notification',notification)
     state.notification.notification =true
-    state.notification.msg = notification.msg 
-    state.notification.color = notification.color
+    state.notification.msg = notification?.msg || "An Error Occured"  
+    state.notification.color = notification?.color || 'error'
     state.notification.h = 'center'
-    if(router.currentRoute.name.indexOf('dashboard') == -1){
-      state.notification.v = 'top'
-    }else{
+    console.log(router.currentRoute)
+    if(router.currentRoute.name.indexOf('Dashboard') == -1){
       state.notification.v = 'bottom'
+    }else{
+      state.notification.v = 'top'
     }
   }
 }
@@ -150,11 +153,11 @@ const getters = {
   dark_gradiant: (state ) =>{
     console.log(state.visualization.drawer.gradient)
     switch (state.visualization.drawer.gradient) {
-      case 0:
-        return true
       case 1:
         return true
-      case 3:
+      case 2:
+        return true
+      case 4:
         return true
       default:
         return false

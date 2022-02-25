@@ -18,6 +18,7 @@ const pq = require("../../database/helpers/promise_query.db");
 router.post("/", user_middleware.auth, async (request, response) => {
   try {
     const Manufacturer_data = request.body;
+    console.log(request.body)
 
     //validation  
     const validaters = [

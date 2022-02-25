@@ -5,8 +5,8 @@ const filter  = require('../../database/helpers/Filter/filter.db')
 const orderby = require('../../database/helpers/orderby.db')
 const sg = require('../../database/helpers/search_generator.db')
 
-module.exports = (table, query_body) => {
-  return new Promise((resolve, reject) => {
+module.exports = async (table, query_body) => {
+  return new Promise(async (resolve, reject) => {
     try {
 
 
@@ -20,7 +20,7 @@ module.exports = (table, query_body) => {
       }
       
       // filter term
-      const filter_term = filter(query_body);
+      const filter_term = await filter(query_body);
 
       // deleted term
       let deleted_term = ' ( deleted = 0 ) '
@@ -57,6 +57,7 @@ module.exports = (table, query_body) => {
       // pagination query
       pg(full_select_query, n_per_page, page)
         .then((result) => {
+          console.log(result)
           resolve(result)
         })
         .catch((error) => {

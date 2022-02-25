@@ -2,6 +2,10 @@
 // Pathify
 import { make } from 'vuex-pathify'
 
+// router 
+import router from '../../router/index'
+
+
 // Data
 const state = {
   drawer: null,
@@ -14,32 +18,117 @@ const state = {
       to: '/dashboard',
     },
     {
-      title: "data entry",
-      icon: "mdi-pencil",
-      items: [
+      title: 'User Profile',
+      icon: 'mdi-account',
+      items:[
         {
-          title: 'user', 
-          icon: 'mdi-account', 
-          items:[
-            {
-              title: "register", 
-              icon: "mdi-plus", 
-              to: "/dashboard/data-entry/user/register"
-            }
-          ]
+          title: "Profile", 
+          icon: "mdi-account", 
+          to: "/dashboard/profile"
+        }
+      ]
+    },
+    {
+      title: 'Doctors',
+      icon: 'mdi-doctor',
+      to: '/dashboard/doctors',
+      items:[
+        {
+          title: "Doctors", 
+          icon: "mdi-file-table-box-multiple", 
+          to: "/dashboard/doctors"
         },
         {
-          title: 'Hospital', 
-          icon: 'mdi-hospital-building', 
-          items:[
-            {
-              title: "register", 
-              icon: "mdi-plus", 
-              to: "/dashboard/data-entry/hostpital/register"
-            }
-          ]
+          title: "register", 
+          icon: "mdi-plus", 
+          to: "/dashboard/doctors/register"
         }
-      ],
+      ]
+    },
+    {
+      title: 'Pharmacies',
+      icon: 'mdi-hospital',
+      to: '/dashboard/pharmacies',
+      items:[
+        {
+          title: "Pharmacies", 
+          icon: "mdi-file-table-box-multiple", 
+          to: "/dashboard/pharmacies"
+        },
+        {
+          title: "register", 
+          icon: "mdi-plus", 
+          to: "/dashboard/pharmacies/register"
+        }
+      ]
+    },
+    {
+      title: 'Medical Reps',
+      icon: 'mdi-sale',
+      to: '/dashboard/medreps',
+      items:[
+        {
+          title: "Medical", 
+          icon: "mdi-file-table-box-multiple", 
+          to: "/dashboard/medreps"
+        },
+        {
+          title: "register", 
+          icon: "mdi-plus", 
+          to: "/dashboard/medreps/register"
+        }
+      ]
+    },
+    {
+      title: 'Hospitals',
+      icon: 'mdi-hospital-building',
+      to: '/dashboard/hospitals',
+      items:[
+        {
+          title: "Hospitals", 
+          icon: "mdi-file-table-box-multiple", 
+          to: "/dashboard/hospitals"
+        },
+        {
+          title: "register", 
+          icon: "mdi-plus", 
+          to: "/dashboard/hospitals/register"
+        }
+      ]
+    },
+    {
+      title: 'Products',
+      icon: 'mdi-cube-outline',
+      to: '/dashboard/products',
+      items:[
+        {
+          title: "Products", 
+          icon: "mdi-file-table-box-multiple", 
+          to: "/dashboard/products"
+        },
+        {
+          title: "register", 
+          icon: "mdi-plus", 
+          to: "/dashboard/products/register"
+        }
+      ]
+    },
+    {
+      title: 'Manufacturers',
+      icon: 'mdi-factory',
+      to: '/dashboard/manufacturers',
+      items:[
+        {
+          title: "Manufacturers", 
+          icon: "mdi-file-table-box-multiple", 
+          to: "/dashboard/manufacturers"
+        },
+        {
+          title: "register", 
+          icon: "mdi-plus", 
+          to: "/dashboard/manufacturers/register"
+        }
+      ]
     },
     // {
     //   title: 'User Profile',
@@ -72,6 +161,26 @@ const state = {
     //   to: '/components/notifications/',
     // },
   ],
+  appbarPageButtonnsCollections:{
+    Hospital:[
+      {
+        icon:'mdi-plus-circle',
+        path:'/dashboard/hospitals/register'
+      },
+    ],
+    MedicalRep:[
+      {
+        icon:'mdi-plus-circle',
+        path:'/dashboard/medreps/register'
+      }
+    ],
+    Pharmacy:[
+      {
+        icon:'mdi-plus-circle',
+        path:'/dashboard/pharmacies/register'
+      }
+    ], 
+  }
 }
 
 const mutations = make.mutations(state)
@@ -82,7 +191,12 @@ const actions = {
   },
 }
 
-const getters = {}
+const getters = {
+  appbarPageButtonns(state){
+    console.log('taking care',router.currentRoute.name)
+    return state.appbarPageButtonnsCollections[router.currentRoute.name]
+  }
+}
 
 export default {
   namespaced: true,

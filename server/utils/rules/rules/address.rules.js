@@ -5,7 +5,7 @@ module.exports = [
             if(typeof value != 'string'){
                 return false
             }
-            if(value.length > 500){
+            if(value.length > 250){
                 return false
             }
             return true

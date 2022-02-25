@@ -106,6 +106,9 @@ export default {
           el.updated_at = el.updated_at?.replace("T", " ").slice(0, -5);
           return el;
         });
+        if(this.options.page != result.page){
+          this.options.page = result.page
+        }
         this.table.pagination.total_count = result.total_number;
         this.table.loading = false;
       });

@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <v-navigation-drawer
     id="default-drawer"
     v-model="drawer"
@@ -8,18 +9,12 @@
     :mini-variant.sync="mini"
     mini-variant-width="80"
     app
+    active-class
     width="260"
   >
     <!-- Drawer color -->
-    <template
-      v-if="drawerImage"
-      #img="props"
-    >
-      <v-img
-        :key="image"
-        :gradient="gradient"
-        v-bind="props"
-      />
+    <template v-if="drawerImage" #img="props">
+      <v-img :key="image" :gradient="gradient || ''" v-bind="props" />
     </template>
 
     <!-- Drawer Body (content) -->
@@ -33,30 +28,11 @@
 
     <!-- Drawer Footer -->
     <template #append>
-      <div class="pa-4 text-center">
-        <app-btn
-          class="text-none mb-4"
-          color="white"
-          href="https://vuetifyjs.com"
-          small
-          text
-        >
-          Documentation
-        </app-btn>
-
-        <app-btn
-          block
-          class="text-none"
-          color="secondary"
-          href="https://store.vuetifyjs.com/products/vuetify-material-dashboard-pro"
-        >
-          <v-icon left>
-            mdi-package-up
-          </v-icon>
-
-          Upgrade to Pro
-        </app-btn>
-      </div>
+      <v-list-item class="mb-0 justify-space-between pl-1">
+        <v-list-item-icon>
+          <v-img :src="require('../../../assets/Aram_Icon.svg')" max-width="60" />
+        </v-list-item-icon>
+      </v-list-item>
     </template>
 
     <div class="pt-12" />
@@ -64,40 +40,32 @@
 </template>
 
 <script>
-  // Utilities
-  import { get, sync } from 'vuex-pathify'
+// Utilities
+/* eslint-disable */
+import { get, sync } from "vuex-pathify";
 
-  export default {
-    name: 'DefaultDrawer',
+export default {
+  name: "DefaultDrawer",
 
-    components: {
-      DefaultDrawerHeader: () => import(
+  components: {
+    DefaultDrawerHeader: () =>
+      import(
         /* webpackChunkName: "default-drawer-header" */
-        '../widgets/DrawerHeader'
+        "../widgets/DrawerHeader"
       ),
-      DefaultList: () => import(
+    DefaultList: () =>
+      import(
         /* webpackChunkName: "default-list" */
-        './List'
-      ),
-    },
+        "./List"
+      )
+  },
 
-    computed: {
-      ...get('user', [
-        'dark_gradiant',
-        'gradient',
-        'image',
-      ]),
-      ...get('app', [
-        'items',
-        'version',
-      ]),
-      ...sync('app', [
-        'drawer',
-        'drawerImage',
-        'mini',
-      ]),
-    },
+  computed: {
+    ...get("user", ["dark_gradiant", "gradient", "image"]),
+    ...get("app", ["items", "version"]),
+    ...sync("app", ["drawer", "drawerImage", "mini"])
   }
+};
 </script>
 
 <style lang="sass">

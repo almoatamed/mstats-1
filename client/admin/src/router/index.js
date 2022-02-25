@@ -47,7 +47,24 @@ const router = new Router({
         route('Google Maps', null, 'maps/google','Junk/GoogleMaps.vue'),
 
         // User
-        route('User Status Table', null,'user/status_table', 'User/UserStatusTable.vue')
+        route('Profile', null,'profile', 'User/profile.vue'),
+        route('User Status Table', null,'user/status_table', 'User/UserStatusTable.vue'),
+
+        // registration 
+        route('HospitalRegistration', null, 'hospitals/register','Hospital/register.vue'),
+        route('DoctorRegistration', null, 'doctors/register','Doctor/register.vue'),
+        route('PharmacyRegistration', null, 'pharmacies/register','Pharmacy/register.vue'),
+        route('MedicalRepRegistration', null, 'medreps/register','MedicalRep/register.vue'),
+        route('ProductRegistration', null, 'products/register','Product/register.vue'),
+        route('ManufacturerRegistration', null, 'manufacturers/register','Manufacturer/register.vue'),
+
+        // main view 
+        route('Hospital', null, 'hospitals','Hospital/main.vue'),
+        route('Doctor', null, 'doctors','Doctor/main.vue'),
+        route('Pharmacy', null, 'pharmacies','Pharmacy/main.vue'),
+        route('MedicalRep', null, 'medreps','MedicalRep/main.vue'),
+        route('Product', null, 'products','Product/main.vue'),
+        route('Manufacturer', null, 'manufacturers','Manufacturer/main.vue'),
 
       ], '/dashboard'),
       meta:{RequiresAuth:true}

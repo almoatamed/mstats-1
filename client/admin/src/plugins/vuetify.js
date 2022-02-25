@@ -8,7 +8,7 @@ import colors from 'vuetify/lib/util/colors'
 Vue.use(Vuetify, { directives: { ripple } })
 
 const theme = {
-  primary: '#E91E63',
+  primary: '#064c86',
   royal: '#064c86',
   secondary: '#9C27b0',
   accent: '#e91e63',

@@ -13,10 +13,15 @@ const multirules = require("../../utils/rules/multirules");
 // db
 const pq = require("../../database/helpers/promise_query.db");
 const uq = require("../../database/helpers/is_unique.db");
+const rq = require('../../database/helpers/many_to_many_relations.db')
+const eq = require('../../database/helpers/exists.db')
 
-router.post("/", user_middleware.auth, async (request, response) => {
+router.post("/", user_middleware.auth, async (request, response, next) => {
   try {
     const pharmacy_data = request.body;
+    console.log(pharmacy_data)
+
+    await eq.valdiate_arr('hospitals','name',pharmacy_data.hospitals)
 
     // validation
     const validaters = [
@@ -30,10 +35,9 @@ router.post("/", user_middleware.auth, async (request, response) => {
       return response.status(env.response.status_codes.invalid_field).json({ error: { name: "Invalid Field", msg: valid.msg } }).end();
     }
 
-
     // validating unique
     const is_unique = await uq("pharmacies", "name", pharmacy_data.name);
-    console.log(is_unique)
+    
     if (!is_unique) {
       return response
         .status(env.response.status_codes.repeated_query)
@@ -71,23 +75,27 @@ router.post("/", user_middleware.auth, async (request, response) => {
         );
       `;
     await pq(insertion_query);
+
+    await rq.insert_arr(
+      'pharmacy_hospital_relations',
+      'pharmacies',
+      'pharmacy_id',
+      'name',
+      pharmacy_data.name,
+      'hospitals',
+      'hospital_id',
+      'name',
+      pharmacy_data.hospitals,
+      request
+    )
+
     return response
       .status(env.response.status_codes.ok)
       .json({ result: { msg: "pharmacy created" } })
       .end();
+
   } catch (error) {
-    if(!response.headersSent){
-      return response
-      .status(env.response.status_codes.server_error)
-      .json({
-        error: {
-          err: error,
-          name: "Pharmacy Registration Error",
-          msg: "Error while registring pharmacy",
-        },
-      })
-      .end();
-    }
+    next(error)
   }
 });
 

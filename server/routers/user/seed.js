@@ -37,10 +37,11 @@ router.get("/", (req, res) => {
       if (result.length == 0) {
         const hash = await bcrypt.hash("admin", env.auth.bcrypt.rounds);
         const seed_query = `
-                    INSERT INTO user(name, user_name, password) VALUES(
+                    INSERT INTO user(name, user_name, password, created_by_user) VALUES(
                         'admin', 
                         'admin', 
-                        '${hash}'  
+                        '${hash}',
+                        1
                     );
                 `;
         connection.query(seed_query, (err, result) => {
@@ -114,8 +115,8 @@ router.get("/factory/:no", async (req, res) => {
         username = gen.username(name);
       }
       let insert_query = `
-                    INSERT INTO user (name, user_name, password) VALUES(
-                        '${name}', '${username}', '${hash}'
+                    INSERT INTO user (name, user_name, password, created_by_user) VALUES(
+                        '${name}', '${username}', '${hash}', 1
                     );
                 `;
       await pq(insert_query);

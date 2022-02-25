@@ -66,19 +66,7 @@ router.post("/", user_middleware.auth, async (request, response) => {
       .json({ result: { msg: "Hospital created" } })
       .end();
   } catch (error) {
-      console.log(error)
-    if(!response.headersSent){
-      return response
-        .status(env.response.status_codes.server_error)
-        .json({
-          error: {
-            err: error,
-            name: "Hospital Registration Error",
-            msg: "Error while registring Hospital",
-          },
-        })
-        .end();
-    }
+    next(error)
   }
 });
 

@@ -24,7 +24,7 @@ app.use('/server/files', express.static(path.join(__dirname, 'public')));
 
 // error handling
 app.use((err, req, res, next)=>{
-    console.log('Handling Error',err.message)
+    console.log('Handling Error',err)
     rm.array(req)
     if(!req.headersSent){
         let status_code = env.response.status_codes.server_error

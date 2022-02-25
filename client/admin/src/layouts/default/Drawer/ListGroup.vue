@@ -1,6 +1,6 @@
 <template>
   <v-list-group
-    :color="gradient !== 2 ? 'white' : undefined"
+    :color="dark_gradiant ? 'white' : undefined"
     :group="group"
     :prepend-icon="item.icon"
     eager
@@ -60,6 +60,7 @@
 
     computed: {
       gradient: get('user/visualization@drawer.gradient'),
+      dark_gradiant: get('user/dark_gradiant'),
       group () {
         return this.genGroup(this.item.items)
       },

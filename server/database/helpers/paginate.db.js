@@ -19,7 +19,7 @@ module.exports = function(query, n_per_page, page=1){
             if(n_per_page > 0){
                 number_of_pages = Math.ceil(count/n_per_page)
                 if((page>number_of_pages || page < 1) && page != 1){
-                    return reject({error:{err:{}, msg:"page out of range", name:"pagination error"},status_code:env.response.status_codes.not_found})
+                    page = number_of_pages
                 }
                 const paginate_query = `
                     select * 

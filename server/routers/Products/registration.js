@@ -7,6 +7,8 @@ const image = require("../../utils/storage/image");
 
 const pq = require("../../database/helpers/promise_query.db");
 const uq = require("../../database/helpers/is_unique.db");
+const eq = require('../../database/helpers/exists.db')
+const rq = require('../../database/helpers/many_to_many_relations.db')
 
 const multirules = require("../../utils/rules/multirules");
 
@@ -14,20 +16,20 @@ const user_middleware = require("../../middlewares/user.middleware");
 
 const env = require("../../env");
 
-const product_image_middle_ware = image.jpg("product_image_file", true);
+const product_image_middle_ware = image.jpg("product_image_file", false);
 router.post(
   "/",
   user_middleware.auth,
   product_image_middle_ware,
   async (req, res, next) => {
     try {
-      console.log("Starting registration ");
+      console.log("Starting registration ",req.body);
+      
       // data
       const saved_file_id = req.isFile ? req.saved_files[0].file_id : "null";
       console.log(saved_file_id);
       const product_data = req.body;
       console.log(product_data.name);
-
       // validation
       const validaters = [
         [["required", "title"], product_data.name, "name"],
@@ -58,14 +60,13 @@ router.post(
       }
 
       // manufacturer id
-      const manufacturer_id = "null";
-      if (product_data.manufacturer_name) {
-        const find_manufacturer = `
-                      select manufacturer_id from manufacturers where name = '${product_data.manufacturer_name}';
-                  `;
-        let manufacturer = await pq(find_manufacturer);
-        manufacturer_id = manufacturer[0].manufacturer_id;
-      }
+      const manufacturer = await eq.validate_one(
+        'manufacturers',
+        'name',
+        req.body.manufacturer
+      )
+      const manufacturer_id = manufacturer.manufacturer_id;
+
 
       // insertion
       const insertion_query = `

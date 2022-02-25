@@ -128,7 +128,12 @@
               }
           }).catch((err)=>{
               self.loading = false
-              self.$store.dispatch('user/notify',{msg:err.response.data.error.msg, color:'error'})
+              console.log('love',err.message)
+              let notification = {
+                msg: err.response?.data?.error?.msg || "Error, please try again later",
+                color: "error"
+              }
+              self.$store.dispatch('user/notify',notification)
           })
       }
     }

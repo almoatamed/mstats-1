@@ -97,7 +97,7 @@ the company wants to know
 - create login route --
 - create auth middle ware --
 - create nginx server --
-- create user registration page 
+- create user registration page --
 - create user registration api --
 - create pagination strategy on server, using indexing on any select query, with limiting to specific number of 
   results, while counting the total number of results for numbering pages with specific page request 
@@ -110,22 +110,22 @@ the company wants to know
 - create user state managment --
 - create user load action on startup/login from local storage --
 - create user setting save to localstorage on logout or app.vue is destroyed --
-- create hospital registration
+- create hospital registration --
 - create hospital registration api --
-- create pharmacy registration page 
+- create pharmacy registration page --
 - create pharmacy registration api with password and username for later use on the pharmacy app --
 - create pharmacies table page 
 - create pharmacy details page (edit page) where pharmacy is to be edited 
-- create medical representative registration page 
+- create medical representative registration page --
 - create medical rep api --
 - create med reps table page 
 - create med rep detail page 
-- create doctor registration page 
+- create doctor registration page --
 - create doctor registration api --
 - create doctors table page 
 - create doctors details page
-- create product registration page with photo upload
-- create product and file registration api for products using multer 
+- create product registration page with photo upload --
+- create product and file registration api for products using multer --
 - create static file api access using express static on route /api/public --
 - create products review page 
 - create product detail page (edit page) with details with parameters view 

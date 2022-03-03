@@ -25,7 +25,7 @@ const validate_insertion = async (
     second_value_field,
     second_value,
   })) {
-    console.log(el)
+    // console.log(el)
     if (typeof el[1] != "string") {
       throw {
         error: { msg: `invalid field`, name: "Relation Creation Error" },
@@ -53,7 +53,7 @@ const validate_insertion = async (
       `select ${first.field} from ${first.table} where ${first.value_field} = '${first.value}' and deleted = 0 limit 1`
     )
   )[0];
-  console.log("first_r", first_r);
+  // console.log("first_r", first_r);
   if (!first_r?.[first.field]) {
     throw {
       error: { msg: `${first.table} ${first.value} not found` },
@@ -114,7 +114,7 @@ const insert_relation = async (
     second_value_field,
     second_value
   );
-  console.log(parties_r)
+  // console.log(parties_r)
   const query = `
         insert into ${relation_table} (${parties_r.first.field},${
     parties_r.second.field
@@ -124,7 +124,7 @@ const insert_relation = async (
             '${req.user.user_id}'
         )
     `;
-  console.log(query)
+  // console.log(query)
   await pq(query);
 };
 
@@ -139,7 +139,7 @@ const validate_get = async (
   second_field,
   second_select_fields
 ) => {
-  console.log('starting')
+  // console.log('starting')
   for (const el of Object.entries({
     relation_table,
     first_table,
@@ -174,14 +174,14 @@ const validate_get = async (
     table: second_table,
     selected_fields,
   };
-  console.log(first,second)
-  console.log(`
-    select ${first.field} from
-    ${first.table} 
-    where 
-        ${first.value_field} = '${first.value}' and
-        deleted = 0 limit 1
-`);
+  // console.log(first,second)
+//   console.log(`
+//     select ${first.field} from
+//     ${first.table} 
+//     where 
+//         ${first.value_field} = '${first.value}' and
+//         deleted = 0 limit 1
+// `);
   let first_r = (
     await pq(`
         select ${first.field} from
@@ -191,7 +191,7 @@ const validate_get = async (
             deleted = 0 limit 1
     `)
   )[0];
-  console.log(first_r);
+  // console.log(first_r);
   if (!first_r?.[first.field]) {
     console.log("throwing");
     throw {
@@ -222,7 +222,7 @@ const get_query = async (
     second_field,
     second_select_fields
   );
-  console.log(parties_r);
+  // console.log(parties_r);
   const query = `
         select ${parties_r.second.selected_fields
           .map((el) => "s." + el)
@@ -238,7 +238,7 @@ const get_query = async (
         on 
         sr_ids.id = s.${parties_r.second.field}
     `;
-  console.log("the great query", query);
+  // console.log("the great query", query);
   // console.log(query)
   return query;
 };
@@ -266,7 +266,7 @@ const get = async (
         second_field,
         second_select_fields
       );
-      console.log("query", query);
+      // console.log("query", query);
       return pg(query, n_per_page, page)
         .then((result) => {
           resolve(result);
@@ -407,7 +407,7 @@ const insert_arr = async (
     second_values
   );
   for (let i = 0; i < second_values.length; i++) {
-    console.log(i)
+    // console.log(i)
     await insert_relation(
       relation_table,
       first_table,

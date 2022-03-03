@@ -18,7 +18,7 @@ const tq = require('../../database/helpers/table_query.db')
 router.post('/names', user_middleware.auth, async (request, response)=>{
     try{
         const query = `
-            select name from hospitals where deleted = 0
+            select name from prescriptions where deleted = 0
         `
         let names = await pq(query)
         names = names.map(el=>{return el.name})
@@ -26,7 +26,7 @@ router.post('/names', user_middleware.auth, async (request, response)=>{
     }catch (error){
         if(!response.headersSent){
             return response.status(env.response.status_codes.server_error).json({
-                error:{err:error, msg:"server error", name:"hospital fetch names error"}
+                error:{err:error, msg:"server error", name:"prescription fetch names error"}
             }).end()
         }
     }
@@ -36,9 +36,9 @@ router.post('/',user_middleware.auth, (request,response)=>{
      try{
         // console.log(request.body)
         const query_body = request.body
-        query_body.search_fields = query_body.search_fields?.length >0 ? query_body.search_fields : ['name', 'email', 'phone', 'address']
-        query_body.selected_fields = query_body.headers?.length > 0 ? query_body.headers : [ 'name', 'phone', 'address', 'email', 'updated_at']
-        tq('hospitals', query_body).then(result=>{
+        query_body.search_fields = query_body.search_fields?.length >0 ? query_body.search_fields : ['name']
+        query_body.selected_fields = query_body.headers?.length > 0 ? query_body.headers : [ 'name']
+        tq('prescriptions', query_body).then(result=>{
             return response.status(env.response.status_codes.ok).json(result).end()
         }).catch(err=>{
             return response.status(err.status_code).json(err).end()
@@ -46,7 +46,7 @@ router.post('/',user_middleware.auth, (request,response)=>{
     }catch (error){
         if(!response.headersSent){
             return response.status(env.response.status_codes.server_error).json({
-                error:{err:error, msg:"server error", name:"hospital fetch error"}
+                error:{err:error, msg:"server error", name:"user fetch error"}
             }).end()
         }
     }

@@ -36,8 +36,7 @@ router.post("/", user_middleware.auth, async (request, response, next) => {
     }
 
     // validating unique
-    const is_unique = await uq("pharmacies", "name", pharmacy_data.name);
-    
+    const is_unique = await uq("pharmacies", "name", pharmacy_data.name);  
     if (!is_unique) {
       return response
         .status(env.response.status_codes.repeated_query)

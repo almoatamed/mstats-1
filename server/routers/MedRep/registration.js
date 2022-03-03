@@ -21,7 +21,7 @@ router.post("/", user_middleware.auth, async (request, response) => {
   try {
     const MedRep_data = request.body;
 
-    await eq.valdiate_arr('products','name',MedRep_data.products)
+    await eq.valdiate_arr('manufacturers','name',MedRep_data.manufacturers)
 
     //validation
     const validaters = [
@@ -68,15 +68,15 @@ router.post("/", user_middleware.auth, async (request, response) => {
 
 
     await rq.insert_arr(
-      'product_medical_representative_relations',
+      'manufacturer_medical_representative_relations',
       'medical_representative',
       'representative_id',
       'name',
       MedRep_data.name,
-      'products',
-      'product_id',
+      'manufacturers',
+      'manufacturer_id',
       'name',
-      MedRep_data.products,
+      MedRep_data.manufacturers,
       request
     )
 

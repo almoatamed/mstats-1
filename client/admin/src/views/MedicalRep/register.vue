@@ -114,18 +114,18 @@
                     </validation-provider>
                   </v-col>
 
-                  <!-- products -->
-                  <v-col cols="12">
+                  <!-- manufacturers -->
+                  <v-col cols="12" md="6">
                     <validation-provider
                       v-slot="{ errors }"
-                      name="Products"
+                      name="Manufacturers"
                       rules="required"
                     >
                       <v-combobox
-                        v-model="products"
+                        v-model="manufacturers"
                         :error-messages="errors"
-                        :items="products_list"
-                        label="Products"
+                        :items="manufacturers_list"
+                        label="Manufacturers"
                         multiple
                         chips
                         clearable
@@ -205,16 +205,16 @@
         phoneNumber: '',
         emailAddress: '',
         address: '',
-        products: [],
-        products_list: [],
+        manufacturers: [],
+        manufacturers_list: [],
       }
     },
     created(){
     const self = this
-    Api.post("product/fetch/names")
+    Api.post("manufacturer/fetch/names")
       .then(response => {
         console.log(response.data.result?.names)
-        for (const product of response.data.result?.names || []) {this.products_list.push(product);}
+        for (const product of response.data.result?.names || []) {this.manufacturers_list.push(product);}
       })
       .catch(err => {
         console.log(err)
@@ -234,7 +234,7 @@
           address: this.address,
           phone: this.phoneNumber,
           email: this.emailAddress,
-          products:this.products
+          manufacturers:this.manufacturers
         }).then(res=>{
           let notification = {
             msg:

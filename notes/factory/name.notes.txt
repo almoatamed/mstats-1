@@ -1,8 +1,0 @@
-
-
-
-name generator --
-
-- craete list of random names --
-- join n number of names randomly --
-- return the joined name --

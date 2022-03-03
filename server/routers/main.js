@@ -9,5 +9,5 @@ router.use('/pharmacy', require('./Pharmacy/main'))
 router.use('/manufacturer', require('./Manufacturer/main'))
 router.use('/medrep', require('./MedRep/main')) // paths should be small letters not camel
 router.use('/product', require('./Products/main')) // paths should be small letters not camel
-
+router.use('/factory', require('./Factory/index'))
 module.exports = router

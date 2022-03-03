@@ -1,4 +1,7 @@
 module.exports = {
+    factory: {
+        enable:true,
+    },
     response:{
         status_codes:{
             invalid_field:400,

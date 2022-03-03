@@ -64,7 +64,7 @@ module.exports = async (table, query_body) => {
           reject(error)
         });
     } catch (error) {
-      reject({error:{err: error, msg: "server error", name: "user fetch error"},status_code:env.response.status_codes.server_error})
+      reject({error:{err: error, msg: "server error", name: "table query error"},status_code:env.response.status_codes.server_error})
     }
   });
 };

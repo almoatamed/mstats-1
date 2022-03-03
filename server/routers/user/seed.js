@@ -8,6 +8,7 @@ const is_unique = require("../../database/helpers/is_unique.db");
 const pq = require("../../database/helpers/promise_query.db");
 
 router.get("/", (req, res) => {
+  console.log(req.originalUrl, req.url, req.baseUrl, req.hostname, req.complete, req.path, req.protocol)
   if (req.query.key != env.auth.seed_key) {
     return res
       .status(env.response.status_codes.not_autharized)
@@ -71,7 +72,8 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/factory/:no", async (req, res) => {
+const factory_middleware = async (req, res,next) => {
+  console.log(req.originalUrl, req.url, req.baseUrl, req.hostname)
   console.log(
     "generating users, req.query",
     req.query,
@@ -88,7 +90,7 @@ router.get("/factory/:no", async (req, res) => {
   }
   try {
     number_of_entries = parseInt(req.params.no);
-    if (number_of_entries == NaN) {
+    if (!(number_of_entries > 0)) {
       throw { name: "factory error", msg: "not defined factory number" };
     }
   } catch (error) {
@@ -109,27 +111,33 @@ router.get("/factory/:no", async (req, res) => {
     const hash = await bcrypt.hash(password, env.auth.bcrypt.rounds);
     for (let index = 0; index < number_of_entries; index++) {
       let name = gen.name(2);
-
+      let phone_number = gen.phone();
+      let address = gen.text(6, 'w');
       let username = gen.username(name);
       while (!is_unique("user", "user_name", username)) {
         username = gen.username(name);
       }
+
       let insert_query = `
-                    INSERT INTO user (name, user_name, password, created_by_user) VALUES(
-                        '${name}', '${username}', '${hash}', 1
+                    INSERT INTO user (name, user_name, password, address, phone_number, created_by_user) VALUES(
+                        '${name}', '${username}', '${hash}', '${address}', '${phone_number}', 1
                     );
                 `;
       await pq(insert_query);
     }
     console.log("done");
-    return res
-      .status(env.response.status_codes.ok)
-      .json({
-        result: {
-          name: "succeed",
-          msg: `created ${number_of_entries} mock user`,
-        },
-      });
+    if (req.baseUrl != '/server/api/factory') {
+      return res
+        .status(env.response.status_codes.ok)
+        .json({
+          result: {
+            name: "succeed",
+            msg: `created ${number_of_entries} mock user`,
+          },
+        });
+    } else {
+      return next()
+    }
   } catch (error) {
     return res
       .status(env.response.status_codes.server_error)
@@ -138,6 +146,10 @@ router.get("/factory/:no", async (req, res) => {
       })
       .end();
   }
-});
+}
 
+router.get("/factory/:no", factory_middleware);
+router.methods = {
+  factory_middleware
+}
 module.exports = router;

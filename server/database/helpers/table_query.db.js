@@ -43,9 +43,10 @@ module.exports = async (table, query_body) => {
       // full query 
       const selected_fields = query_body.selected_fields
       const full_select_query = `
-            select ${
-              selected_fields?.length > 0 ? selected_fields.join(', ') : '*'
-            } from ${table} ${where_term} ${order_term} 
+            \nselect ${
+              selected_fields?.length > 0 ? selected_fields.map(el=>`output_table.${el}`).join(',\n ') : '*'
+            } \nfrom ${table} as output_table
+            \n${where_term} \n${order_term} 
         `;
 
       console.log(full_select_query)

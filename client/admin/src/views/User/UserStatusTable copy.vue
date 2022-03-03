@@ -5,9 +5,9 @@
     :search_fields="search_fields"
     :table_actions="table_actions"
     :headers="headers"
-    api_url="/sheet/fetch"
-    title="Sheets"
-    subtitle="Sheets Details Table"
+    api_url="/user/fetch"
+    title="Users"
+    subtitle="User Details Table"
     :no_search="false"
     :no_filter="false"
     :filters="filters"
@@ -22,12 +22,10 @@
 export default {
   data: () => ({
     headers: [
-      { text: "ID", value: "sheet_id" },
-      { text: "Doctor Name", value: "doctor_name" },
-      { text: "Prescription Name", value: "prescription_name" },
-      { text: "Status", value: "status" },
-      { text: "Printed", value: "printed" },
-      { text: "Pharmacy Name", value: "pharmacy_name" },
+      { text: "Username", value: "user_name" },
+      { text: "Name", value: "name" },
+      { text: "Phone", value: "phone_number" },
+      { text: "Address", value: "address" },
       { text: "Last Modified", value: "updated_at" }
     ],
     filters: {
@@ -70,7 +68,7 @@ export default {
       ]
     },
     search_fields:[
-      'doctor_name', 'prescription_name', 'status', 'printed'
+      'user_name', 'name'
     ]
   }),
   methods:{

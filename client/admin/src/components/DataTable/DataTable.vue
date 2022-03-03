@@ -132,7 +132,8 @@ export default {
       if (this.table_actions?.actions?.length > 0) {
         full_headers.push({
           text: this.table_actions?.name || "Actions",
-          value: "actions"
+          value: "actions",
+          sortable: false,
         });
       }
       console.log(full_headers)

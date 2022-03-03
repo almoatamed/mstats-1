@@ -31,6 +31,10 @@ middlewares.push(doctor_router.methods.factory_middleware)
 const prescription_router = require('../Prescription/seed')
 middlewares.push(prescription_router.methods.factory_middleware)
 
+const sheets_router = require('../Sheets/seed')
+middlewares.push(sheets_router.methods.factory_middleware)
+
+
 middlewares.push((req,res)=>{
     return res.status(env.response.status_codes.ok).json({result:{msg:'success'},status_code:env.response.status_codes.ok})
 })

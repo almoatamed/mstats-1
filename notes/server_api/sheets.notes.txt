@@ -1,0 +1,13 @@
+
+
+
+- registrations
+  - eq.validate on prescription.name -> id --
+  - eq.validate on doctor.name -> id --
+  - eq.validate number --
+  - insert --
+- fetch --
+- seed/factory --
+
+
+  

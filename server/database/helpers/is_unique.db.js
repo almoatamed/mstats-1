@@ -8,7 +8,7 @@ module.exports = (table, field, value)=>{
                 return reject(err)
             }
             const query = `
-                SELECT * FROM ${table} WHERE ${field} = '${value}';
+                SELECT * FROM ${table} WHERE ${field} = '${value}' limit 1;
             `
             connection.query(query, (err,result)=>{
                 if(err){

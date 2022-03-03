@@ -114,17 +114,43 @@ CREATE TABLE IF NOT EXISTS`prescriptions` (
   `created_by_user` INT
 );
 
+
 CREATE TABLE IF NOT EXISTS`sheets` (
   `sheet_id` INT PRIMARY KEY AUTO_INCREMENT,
   `doctor_id` INT,
   `prescription_id` INT,
-  `status` INT,
-  `pharmacy_id` INT,
+  `status` INT DEFAULT 0,
+  `printed` INT DEFAULT 0,
+  `pharmacy_id` INT DEFAULT NULL,
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT DEFAULT 0,
   `created_by_user` INT
 );
+
+
+CREATE TABLE IF NOT EXISTS`sheet_status` (
+  `sheet_status_id` INT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(255)
+);
+INSERT INTO `sheet_status`(`sheet_status_id`,`name`) values(
+  '1', 'Unused'
+);
+INSERT INTO `sheet_status`(`sheet_status_id`,`name`) values(
+  '2', 'Used'
+);
+
+CREATE TABLE IF NOT EXISTS`sheet_printed` (
+  `sheet_printed_id` INT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(255)
+);
+INSERT INTO `sheet_printed`(`sheet_printed_id`,`name`) values(
+  '1', 'Not Printed'
+);
+INSERT INTO `sheet_printed`(`sheet_printed_id`,`name`) values(
+  '2', 'Printed'
+);
+
 
 CREATE TABLE IF NOT EXISTS`doctor_hospital_relations` (
   `relation_id` INT PRIMARY KEY AUTO_INCREMENT,

@@ -1,0 +1,11 @@
+
+
+- user --
+- hospital --
+- manufacturer -- 
+- product --
+- pharmacy  --
+- medical rep  --
+- doctor  --
+- prescription generator 
+- bulk sheet

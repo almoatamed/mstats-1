@@ -1,4 +1,10 @@
 module.exports = {
+    client: {
+        sheets:{
+            generator_max:100,
+            generator_min:1,
+        }
+    },
     factory: {
         enable:true,
     },

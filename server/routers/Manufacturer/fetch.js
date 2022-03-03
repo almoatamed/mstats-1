@@ -26,7 +26,7 @@ router.post('/names', user_middleware.auth, async (request, response)=>{
     }catch (error){
         if(!response.headersSent){
             return response.status(env.response.status_codes.server_error).json({
-                error:{err:error, msg:"server error", name:"medical representative fetch names error"}
+                error:{err:error, msg:"server error", name:"manufacturers fetch names error"}
             }).end()
         }
     }
@@ -46,7 +46,7 @@ router.post('/',user_middleware.auth, (request,response)=>{
     }catch (error){
         if(!response.headersSent){
             return response.status(env.response.status_codes.server_error).json({
-                error:{err:error, msg:"server error", name:"user fetch error"}
+                error:{err:error, msg:"server error", name:"manufacturers fetch error"}
             }).end()
         }
     }

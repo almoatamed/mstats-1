@@ -18,7 +18,7 @@ const tq = require('../../database/helpers/table_query.db')
 router.post('/names', user_middleware.auth, async (request, response)=>{
     try{
         const query = `
-            select name from hospitals where deleted = 0
+            select name from doctors where deleted = 0
         `
         let names = await pq(query)
         names = names.map(el=>{return el.name})
@@ -38,7 +38,7 @@ router.post('/',user_middleware.auth, (request,response)=>{
         const query_body = request.body
         query_body.search_fields = query_body.search_fields?.length >0 ? query_body.search_fields : ['name', 'email', 'phone', 'address']
         query_body.selected_fields = query_body.headers?.length > 0 ? query_body.headers : [ 'name', 'phone', 'address', 'email', 'updated_at']
-        tq('hospitalss', query_body).then(result=>{
+        tq('doctors', query_body).then(result=>{
             return response.status(env.response.status_codes.ok).json(result).end()
         }).catch(err=>{
             return response.status(err.status_code).json(err).end()

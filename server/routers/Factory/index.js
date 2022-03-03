@@ -25,8 +25,11 @@ middlewares.push(pharmacy_router.methods.factory_middleware)
 const medrep_router = require('../MedRep/seed')
 middlewares.push(medrep_router.methods.factory_middleware)
 
-const seed_router = require('../Doctor/seed')
-middlewares.push(seed_router.methods.factory_middleware)
+const doctor_router = require('../Doctor/seed')
+middlewares.push(doctor_router.methods.factory_middleware)
+
+const prescription_router = require('../Prescription/seed')
+middlewares.push(prescription_router.methods.factory_middleware)
 
 middlewares.push((req,res)=>{
     return res.status(env.response.status_codes.ok).json({result:{msg:'success'},status_code:env.response.status_codes.ok})

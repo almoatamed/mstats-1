@@ -156,9 +156,9 @@ CREATE TABLE IF NOT EXISTS`doctor_medical_representative_relations` (
   `created_by_user` INT
 );
 
-CREATE TABLE IF NOT EXISTS`product_medical_representative_relations` (
+CREATE TABLE IF NOT EXISTS`manufacturer_medical_representative_relations` (
   `relation_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `product_id` INT,
+  `manufacturer_id` INT,
   `representative_id` INT,
   `created_at` timestamp DEFAULT current_timestamp,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

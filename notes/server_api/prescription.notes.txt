@@ -1,0 +1,11 @@
+
+
+
+- create route --
+- eq products --
+- create validate data --
+  - name --
+- insert data --
+- insert relations --
+- create fetch --
+- create seeder --

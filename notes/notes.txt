@@ -134,8 +134,8 @@ the company wants to know
   with name and other details if requries 
 - create prescriptions table page 
 - craete prescription detail page showing paramters (stats) and prescription details
-- create prescription fetchign/searching api 
-- create a way to generate sheets for certain prescription linked to certain doctor certain doctor, where it will be generated and saved 
+- create prescription fetchign/searching api --
+- create a way to generate sheets for certain prescription linked to certain doctor, where it will be generated and saved 
   to database, with flags of unused, unprinted, once generated you can print it using html2pdf,
   you can also print the unused sheets ( as a reprent) 
 - design a login page for the pharmcy app 

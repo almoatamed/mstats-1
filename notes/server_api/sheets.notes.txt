@@ -6,8 +6,10 @@
   - eq.validate on doctor.name -> id --
   - eq.validate number --
   - insert --
-- fetch --
+- fetch with tq --
 - seed/factory --
+
+
 
 
   

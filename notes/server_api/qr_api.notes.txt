@@ -1,0 +1,18 @@
+
+
+
+- craete qr route in the sheets rotuer
+- the qr route is a post route
+- the qr route receives two pieces of data the pharmacy [optional]
+- and the qr string 
+  - the qr string is combination of three parts the sheet id, the prescription id, the doctor id
+  - these three parts are seperated with hiphen [-]
+  - example: 123-3-2 -> sheet 123 prescription 2 doctor 2
+  - split these three pieces of data
+  - validate them using eq.validate_one (existance query utility in database helpers) 
+  - build your query to mark the sheet as used
+    - update sheets set status = '1' where sheet_id = '${query_qr.slice(0,query_qr.indexOf('-'))}';
+  - apply the query using the pq utility (promised query) 
+  - await the query ( make sure to make the route async)
+  - put your code in a try and catch block
+  - next the error in the the catch block
